@@ -11,7 +11,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     TeoriaFluxo/variaveisdemanda.cpp \
+<<<<<<< HEAD
     TeoriaFluxo/variaveisoferta.cpp
+=======
+    TeoriaFluxo/variaveisservico.cpp
+>>>>>>> eb4a60f4a759c2b1b8b57216c412a599c2da0785
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -26,4 +30,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
     TeoriaFluxo/variaveisdemanda.h \
+<<<<<<< HEAD
     TeoriaFluxo/variaveisoferta.h
+=======
+    TeoriaFluxo/variaveisservico.h
+>>>>>>> eb4a60f4a759c2b1b8b57216c412a599c2da0785
