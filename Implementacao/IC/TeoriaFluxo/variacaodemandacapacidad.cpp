@@ -13,3 +13,8 @@ float VariacaoDemandaCapacidad::getEquivalenciaMedioGloabal(float sumP0)
     /*Favor olhar a pagina 12 da apostila em questão*/
     return 1/sumP0;
 }
+
+float VariacaoDemandaCapacidad::getDistribuicaoIntervalosChegadas(float q)
+{
+    return 1/q;
+}
