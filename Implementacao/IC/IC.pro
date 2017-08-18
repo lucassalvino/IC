@@ -12,7 +12,8 @@ TEMPLATE = app
 SOURCES += main.cpp \
     TeoriaFluxo/variaveisdemanda.cpp \
     TeoriaFluxo/variaveisoferta.cpp \
-    TeoriaFluxo/variaveisservico.cpp
+    TeoriaFluxo/variaveisservico.cpp \
+    TeoriaFluxo/variacaodemandacapacidad.cpp
     TeoriaFluxo/variaveisoferta.cpp
 
     TeoriaFluxo/variaveisservico.cpp
@@ -31,6 +32,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     TeoriaFluxo/variaveisdemanda.h \
     TeoriaFluxo/variaveisoferta.h \
-    TeoriaFluxo/variaveisservico.h
+    TeoriaFluxo/variaveisservico.h \
+    TeoriaFluxo/variacaodemandacapacidad.h \
+    utilidades.h
     TeoriaFluxo/variaveisoferta.h
     TeoriaFluxo/variaveisservico.h
