@@ -11,8 +11,10 @@ class VariacaoDemandaCapacidad
 public:
 
     /* favor olhar página 12 da apostila em questão*/
-    float getFatoresEquivalenciaEspecificos(float o1, float o0);
-    float getEquivalenciaMedioGloabal(float sumP0);
+    static float getFatoresEquivalenciaEspecificos(float o1, float o0);
+    static float getEquivalenciaMedioGloabal(float sumP0);
+    static float getDistribuicaoIntervalosChegadas(float q);
+
 };
 
 #endif // VARIACAODEMANDACAPACIDAD_H
