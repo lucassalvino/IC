@@ -1,0 +1,57 @@
+\documentclass[12pt,twoside,openright,a4paper,brazil]{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+\usepackage[usenames]{color}
+\title{Introdução à Algoritmos Genéticos}
+\author{Lucas Salvino de Deus \\ lucassalvino1@gmail.com}
+\date{\today}
+
+
+\usepackage{indentfirst}
+\begin{document}
+
+	\begin{titlepage}%página de título e autor
+	\maketitle
+	\end{titlepage}
+	
+	\begin{abstract}%resumo do trabalho
+		Resumo de fundamentos e termos à Algoritmos Genéticos (AG). Será apresentado no dia primeiro de Setembro de 2017, como introdução aos estudos do projeto. Apresenta os principais conceitos e sujestões de bibliografia para estudo no decorrer do projeto.
+		
+		Baseado nos conceitos de seleção natural apresentados por Darwin em 1858, os Algoritmos Genéticos (AG) são uma técnica de busca eficiente em varrer o espaço de soluções e em encontrar soluções próximas à ótima.
+	\end{abstract}
+	
+	\section{Introdução}
+		Métodos de busca convencionais, são muito utilizados por apresentar desempenho satisfatório para conjunto de dados finitos e onde se conhece a estrutura onde os dados estão armazenados. Para estruturas pouco conhecida, dados dinâmicos ou grande quantidades de informações envolvidas em cada busca, os métodos convêncionais começam a apresentar problemas de desempenho. Os AG são utilizados para esses casos.
+		
+		Os AG são um técinca computacional utilizada para encontrar soluções aproximadas em problemas de otimização e busca. Seu funcionamento é totalemente baseada na teoria da Seleção Natural proposta por Darwin.
+		
+		Segunda a mesma,as espécies atuais evoluiram de variações de suas gerações antecessoras e ainda continuam a se alterar. Em resumo, variações vantajosas apresentadas por um índivíduo possuem mais chances de serem mantidas em sua população, com o passar das gerações, essas carcteristicas passam a ser comuns para a população, enquanto as demais variações menos 'benéficas' ao índivíduo (e à população) não conseguem prevalecer para as gerações futuras.Essas alterações ao decorrer de várias gerações acabaram por gerar toda a vida que conhecemos atualmente.
+			
+	\section{Definições}
+	\begin{description}
+		\item[Gene] Caracteristica isolada de um indivíduo, em genética é a unidade fundamental da hereditariedade.
+		\item[Cromossomos] Conjunto de genes que representão todas as caracteristicas de um indivíduo, em genética, é um conjunto de DNA, que por sua vez são formadas de genes.
+		\item[População] Conjunto de índivíduos, em biologia genética, é um ramo que estuda a mudança na frequência de alelos sob influência das quatro forças evolutivas: seleção naturalm deriva gênica, mutação e fluxo gênico.
+		\item[Geração] Cada Ciclo do algoritmo, espaço de tempo que separa cada um dos graos de filiação.
+		\item[Cruzamentento] Processo no qual se gera filhos a partir de dois indivíduos, acasalento entre indivíduos distintos.
+		\item[Seleção] Processo no qual os índivíduos mais adaptaveis ao ambiente conseguem sobreviver por mais tempo ou atrair mais atenção de outras índividuos da população, garantido sua reprodução e assim passando seus cromossomos para as gerações futuras.
+		\item[Mutação] Erros que ocorrem durante a cópia de cromossomos, esses erros podem levar a criação de novas caracteristicas, essas podem ser vantajosas para os novos indivíduos, ou prejudiciais.
+	\end{description}
+
+	\subsection{Princípios}
+		\begin{itemize}
+		\item Indivíduos disputam por recursos no ambiente.
+		\item Indivíduos mais adaptados possuem uma maior probabilidade de sobreviver e consequente, se reproduzir
+		\item O processo de evolução não ocorre sem problemas, durante o processo de cópia de um cromossomo, pode ocorrer erros, que são conhecidos como multação
+		\end{itemize}
+		
+	\section{Algoritmo Genético}
+	O Algoritmo genético simula todo o processo de seleção natural dentro de um modelo computacional. Geralmente um cromossomo é representado por um vetor, onde cada elemento representa um gene. Os genes assim como na genética representam uma caracteristica da solução, logo, cada cromossomo representa uma possível solução.
+	
+	Os passos para execução de um Algoritmo Genético segue os passos abaixo:
+	\begin{enumerate}
+	\item \textbf{População inicial}: A população inicial é gerada aleatriamente, mas desde que cada índividou (cromossomo) represente uma possível solução. 
+	\end{enumerate}
+	
+\end{document}
