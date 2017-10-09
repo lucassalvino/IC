@@ -1,0 +1,4 @@
+#ifndef AGUTILITIES_H
+#define AGUTILITIES_H
+
+#endif // AGUTILITIES_H
