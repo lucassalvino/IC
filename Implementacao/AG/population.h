@@ -8,8 +8,6 @@
 #include <iostream>
 using namespace std;
 
-#define TEMPLATE template<class TIPO>
-
 TEMPLATE
 class Population
 {

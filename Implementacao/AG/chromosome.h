@@ -5,13 +5,19 @@
 #include "generategene.h"
 
 using namespace std;
-template <class TIPO>
+#define TEMPLATE template<class TIPO>
+
+TEMPLATE
 class Chromosome
 {
 public:
     Chromosome(){
         gene = 0;
         numberOfElements = 0;
+    }
+
+    ~Chromosome(){
+        //clear();
     }
 
     virtual TIPO* getGene(){
@@ -60,6 +66,24 @@ public:
     int getNumberOfElements()
     {
         return this->numberOfElements;
+    }
+
+    void setNumberOfElements(int value){
+        if(gene == 0){
+            if(value <= 0)throw string ("O tamanho do cromossomo deve ser maior do que 0 [ZERO]");
+            numberOfElements = value;
+            gene = new TIPO[this->numberOfElements];
+        }else{
+            throw string("O gene ja foi iniciado, sera necessario apagar o mesmo [clear()], ou criar um novo\n");
+        }
+    }
+
+    void clear(){
+        if(gene != 0){
+            delete [] gene;
+        }
+        gene = 0;
+        numberOfElements = 0;
     }
 private:
     TIPO* gene; /*Conjunto de genes*/

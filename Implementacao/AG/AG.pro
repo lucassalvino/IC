@@ -10,7 +10,8 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    population.cpp
+    population.cpp \
+    operators.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -28,4 +29,7 @@ HEADERS += \
     agutilities.h \
     population.h \
     generategene.h \
-    population.hpp
+    population.hpp \
+    evaluationfunction.h \
+    operators.h \
+    operators.hpp

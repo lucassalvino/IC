@@ -2,13 +2,14 @@
 #include <stdio.h>
 using namespace std;
 #include <random>
+#include <time.h>
 #include "population.hpp"
 
 class XGenerateGene : public GenerateGene<int>{
 public:
     int getRandomGene() override{
         default_random_engine generator;
-        generator.seed(clock());
+        generator.seed(rand()/3.141525);
         exponential_distribution<double> distribution(1);
         if(distribution(generator) < 0.5)
             return 1;
