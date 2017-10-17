@@ -33,4 +33,5 @@ HEADERS += \
     operators.h \
     operators.hpp \
     calculateevaluation.h \
-    utility.h
+    utility.h \
+    generation.h

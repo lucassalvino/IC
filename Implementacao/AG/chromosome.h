@@ -105,8 +105,16 @@ public:
         evaluation = value;
     }
 
+    int getIdGene(){
+        return idGene;
+    }
+    void setIdGene(int value){
+        idGene = value;
+    }
+
 private:
     TIPO* gene; /*Conjunto de genes*/
+    int idGene;
     double evaluation;
     int numberOfElements; /*Numero de elementos do gene*/
 };
