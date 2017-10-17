@@ -15,6 +15,21 @@ Population<TIPO>::~Population()
 }
 
 TEMPLATE
+void Population<TIPO>::evaluationAll()
+{
+    this->evaluationSum = 0;
+    for(list<Chromosome<int> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
+        evaluationSum += calculateEvaluation->getEvaluation(*it);
+    }
+}
+
+TEMPLATE
+void Population::roulette()
+{
+
+}
+
+TEMPLATE
 void Population<TIPO>::initPopulation(int sizePopulation, int numGenes)
 {
     for(int i = 0; i<sizePopulation; i++){

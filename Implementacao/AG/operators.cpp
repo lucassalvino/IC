@@ -55,6 +55,16 @@ Chromosome<TIPO> Operators::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosom
 }
 
 TEMPLATE
+Chromosome<TIPO> Operators::Mutation(Chromosome<TIPO> chromos, double chance)
+{
+    for(int i=0;i<chromos.getNumberOfElements();i++){
+        if(random()<chance){
+
+        }
+    }
+}
+
+TEMPLATE
 Operators::generateTwoDivisionPoints(int &firstDivisionPoint, int &secondDivisionPoint, int maxPoint)
 {
     firstDivisionPoint = rand()%maxPoint;

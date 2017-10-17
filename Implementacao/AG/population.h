@@ -15,9 +15,11 @@ class Population
 public:
     Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc);
     ~Population();
+    void evaluationAll();
     void initPopulation(int sizePopulation, int numGenes);
     void printChomosomeOfPopulation();
 private:
+    double evaluationSum;
     list<Chromosome<TIPO> > chromosomes;
     GenerateGene<TIPO>* getGene;
     CalculateEvaluation<TIPO>* calculateEvaluation;

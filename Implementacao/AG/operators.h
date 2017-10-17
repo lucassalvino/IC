@@ -13,6 +13,7 @@ public:
     static Chromosome<TIPO> CrossOverOnePoint(Chromosome<TIPO> mother,Chromosome<TIPO> father, int divisionPoint);
     static Chromosome<TIPO> CrossOverTwoPoint(Chromosome<TIPO> mother,Chromosome<TIPO> father);
     static Chromosome<TIPO> CrossOverTwoPoint(Chromosome<TIPO> mother,Chromosome<TIPO> father, int firstDivisionPoint, int secondDivisionPoint);
+    static Chromosome<TIPO> Mutation(Chromosome<TIPO> chromos);
 private:
     static generateTwoDivisionPoints(int& firstDivisionPoint, int& secondDivisionPoint,int maxPoint);
 };
