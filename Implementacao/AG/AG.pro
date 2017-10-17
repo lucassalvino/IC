@@ -30,6 +30,6 @@ HEADERS += \
     population.h \
     generategene.h \
     population.hpp \
-    evaluationfunction.h \
     operators.h \
-    operators.hpp
+    operators.hpp \
+    calculateevaluation.h

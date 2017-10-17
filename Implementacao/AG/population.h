@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "chromosome.h"
+#include "calculateevaluation.h"
 #include <list>
 #include <iostream>
 using namespace std;
@@ -12,14 +13,14 @@ TEMPLATE
 class Population
 {
 public:
-    Population();
-    Population(GenerateGene<TIPO> *ge);
+    Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc);
     ~Population();
     void initPopulation(int sizePopulation, int numGenes);
     void printChomosomeOfPopulation();
 private:
     list<Chromosome<TIPO> > chromosomes;
     GenerateGene<TIPO>* getGene;
+    CalculateEvaluation<TIPO>* calculateEvaluation;
 };
 
 #endif // POPULATION_H

@@ -63,6 +63,17 @@ public:
         }
     }
 
+    Chromosome<TIPO> getSubChromosome(int init,int final){
+        if(init < 0 || final < 0 || init > numberOfElements || final > numberOfElements ||  init > final)
+            throw string("Os valores [Init] e [Final] sao invalidos");
+        Chromosome<TIPO> ret;
+        ret.setNumberOfElements(final-init+1);
+        int _init = init;
+        for(;init<final;init++)
+            ret.setGeneAt(init - _init, this->getGeneAt(init));
+        return ret;
+    }
+
     int getNumberOfElements()
     {
         return this->numberOfElements;
@@ -85,8 +96,18 @@ public:
         gene = 0;
         numberOfElements = 0;
     }
+
+    double getEvaluation(){
+        return evaluation;
+    }
+
+    void setEvaluation(double value){
+        evaluation = value;
+    }
+
 private:
     TIPO* gene; /*Conjunto de genes*/
+    double evaluation;
     int numberOfElements; /*Numero de elementos do gene*/
 };
 #endif // CHROMOSOME_H

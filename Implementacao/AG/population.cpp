@@ -1,20 +1,17 @@
 #include "population.h"
-TEMPLATE
-Population<TIPO>::Population()
-{
-    getGene = new GenerateGene<TIPO>();
-}
 
 TEMPLATE
-Population<TIPO>::Population(GenerateGene<TIPO> *ge)
+Population<TIPO>::Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc)
 {
     getGene = ge;
+    calculateEvaluation = calc;
 }
 
 TEMPLATE
 Population<TIPO>::~Population()
 {
     delete [] getGene;
+    delete [] calculateEvaluation;
 }
 
 TEMPLATE
