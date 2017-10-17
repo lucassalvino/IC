@@ -32,4 +32,5 @@ HEADERS += \
     population.hpp \
     operators.h \
     operators.hpp \
-    calculateevaluation.h
+    calculateevaluation.h \
+    utility.h

@@ -7,6 +7,9 @@
 #include "calculateevaluation.h"
 #include <list>
 #include <iostream>
+#include <random>
+#include <time.h>
+#include "utility.h"
 using namespace std;
 
 TEMPLATE
@@ -20,6 +23,8 @@ public:
     void printChomosomeOfPopulation();
 private:
     double evaluationSum;
+    void updateEvaluationSum();
+    Chromosome<TIPO> roulette();
     list<Chromosome<TIPO> > chromosomes;
     GenerateGene<TIPO>* getGene;
     CalculateEvaluation<TIPO>* calculateEvaluation;
