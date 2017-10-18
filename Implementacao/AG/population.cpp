@@ -29,7 +29,6 @@ TEMPLATE
 Chromosome<TIPO> Population<TIPO>::roulette()
 {
     updateEvaluationSum();
-    default_random_engine generator(time(0));
     double aux = 0;
     double limit = Utility::fRand(0,this->evaluationSum);
     typename list<Chromosome<TIPO> >::iterator it;
@@ -99,7 +98,7 @@ void Population<TIPO>::updateEvaluationSum() /*Calcula o valor de todos os cromo
 {
     this->evaluationSum = 0;
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
-        it->setEvaluation(this->calculateEvaluation->getEvaluation(*it));
+        it->setEvaluation(this->calculateEvaluation->getEvaluation(&(*it)));
         this->evaluationSum += it->getEvaluation();
     }
 }

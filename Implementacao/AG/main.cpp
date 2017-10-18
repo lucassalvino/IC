@@ -17,19 +17,19 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
 
     virtual double calculateEvaluation(Chromosome<int> value) override {
         double ret = 0;
-        for(int i = 0; i< value.getNumberOfElements(); i++){
+        for(int i = 0; i < value.getNumberOfElements(); i++){
             ret*=2;
             if(value.getGeneAt(i) == 1) ret+=1;
         }
         return ret;
     }
-    virtual double getEvaluation(Chromosome<int>& value) override{
-        double x = calculateEvaluation(value,0,21);
-        double y = calculateEvaluation(value,22,43);
+    virtual double getEvaluation(Chromosome<int>* value) override{
+        double x = calculateEvaluation(*value,0,21);
+        double y = calculateEvaluation(*value,22,44);
         x=x*FATOR-100;
         y=y*FATOR-100;
-        value.setEvaluation(1/((x*x+y*y)+1));
-        return value.getEvaluation();
+        value->setEvaluation(1/((x*x+y*y)+1));
+        return value->getEvaluation();
     }
 };
 

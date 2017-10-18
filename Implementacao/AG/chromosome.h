@@ -12,7 +12,7 @@ class Chromosome
 {
 public:
     Chromosome(){
-        numberOfElements = 0;
+        numberOfElements = -1;
     }
 
     ~Chromosome(){
@@ -31,25 +31,29 @@ public:
     }
     virtual void setGeneAt(int index, TIPO value)
     {
+        if(numberOfElements == -1) throw string("He necessário setar a quantidade de genes antes de realizar a inserção de genes");
         if(index < 0 || index >= this->numberOfElements)
-            throw string("[index] he invalido, ou variaveis cromossomo nao inicializado");
-        this->gene[index] = value;
+            throw string("[index] he invalido ou as variaveis cromossomo nao inicializado");
+        this->gene[index] = value; //aki o
     }
 
     virtual void setGene(vector<TIPO> value)
     {
         if(value.size() == 0)
             throw string("O valor do cromossomo he inválido.");
-        else
+        else{
             this->gene = value;
+            numberOfElements = gene.size();
+        }
     }
 
     virtual void generateRandom(GenerateGene<TIPO> * getGene,int numberOfElements)
     {
-        this->numberOfElements = numberOfElements;
+        clear();
+        this->setNumberOfElements(numberOfElements);
         for(int i = 0; i<numberOfElements;i++)
         {
-            gene.push_back(getGene->getRandomGene());
+            this->setGeneAt(i,getGene->getRandomGene());
         }
     }
 
@@ -82,7 +86,7 @@ public:
 
     void clear(){
         gene.clear();
-        numberOfElements = 0;
+        numberOfElements = -1;
     }
 
     double getEvaluation(){
