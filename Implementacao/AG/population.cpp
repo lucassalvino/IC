@@ -42,15 +42,16 @@ Chromosome<TIPO> Population<TIPO>::roulette()
 TEMPLATE
 Chromosome<TIPO> Population<TIPO>::getBestChromosome()
 {
-    Chromosome<TIPO> ret;
+    Chromosome<TIPO>* ret;
     double bestEvaluation = 0;
+    this->updateEvaluationSum();
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         if(it->getEvaluation() > bestEvaluation){
             bestEvaluation = it->getEvaluation();
-            ret = *it;
+            ret = &(*it);
         }
     }
-    return ret;
+    return *ret;
 }
 
 TEMPLATE
@@ -120,6 +121,7 @@ TEMPLATE
 void Population<TIPO>::CalculateNextPopulation()
 {
     new_chromosomes.clear();
+    updateEvaluationSum();
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         Chromosome<TIPO> son = operators->CrossOverOnePoint(*it,roulette());
         son = operators->Mutation(son,environment.getRateChange(),this->getGene);
@@ -136,4 +138,5 @@ void Population<TIPO>::nextPopulation()
     for(typename list<Chromosome<TIPO> >::iterator it = new_chromosomes.begin(); it != new_chromosomes.end(); it++){
         chromosomes.push_back(*it);
     }
+    new_chromosomes.clear();
 }
