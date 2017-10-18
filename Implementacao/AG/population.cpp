@@ -124,6 +124,7 @@ void Population<TIPO>::CalculateNextPopulation()
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         Chromosome<TIPO> son = operators->CrossOverOnePoint(*it,roulette());
         son = operators->Mutation(son,environment.getRateChange(),this->getGene);
+        son.setIdGene(this->idGeneration++);
         new_chromosomes.push_back(son);
     }
 }

@@ -26,7 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
     chromosome.h \
-    agutilities.h \
     population.h \
     generategene.h \
     population.hpp \

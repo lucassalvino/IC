@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "generategene.h"
-
+#include <vector>
 using namespace std;
 #define TEMPLATE template<class TIPO>
 
@@ -12,15 +12,14 @@ class Chromosome
 {
 public:
     Chromosome(){
-        gene = 0;
         numberOfElements = 0;
     }
 
     ~Chromosome(){
-        //clear();
+        clear();
     }
 
-    virtual TIPO* getGene(){
+    virtual vector<TIPO> getGene(){
         return gene;
     }
 
@@ -37,9 +36,9 @@ public:
         this->gene[index] = value;
     }
 
-    virtual void setGene(TIPO* value)
+    virtual void setGene(vector<TIPO> value)
     {
-        if(value == 0)
+        if(value.size() == 0)
             throw string("O valor do cromossomo he inválido.");
         else
             this->gene = value;
@@ -48,18 +47,9 @@ public:
     virtual void generateRandom(GenerateGene<TIPO> * getGene,int numberOfElements)
     {
         this->numberOfElements = numberOfElements;
-        if(gene == 0)
-        {
-            gene = new TIPO[this->numberOfElements];
-        }
-        else
-        {
-            delete [] gene;
-            gene = new TIPO[this->numberOfElements];
-        }
         for(int i = 0; i<numberOfElements;i++)
         {
-            gene[i] = getGene->getRandomGene();
+            gene.push_back(getGene->getRandomGene());
         }
     }
 
@@ -80,20 +70,18 @@ public:
     }
 
     void setNumberOfElements(int value){
-        if(gene == 0){
+        if(gene.size() == 0){
             if(value <= 0)throw string ("O tamanho do cromossomo deve ser maior do que 0 [ZERO]");
+            clear();
             numberOfElements = value;
-            gene = new TIPO[this->numberOfElements];
+            gene.resize(numberOfElements);
         }else{
             throw string("O gene ja foi iniciado, sera necessario apagar o mesmo [clear()], ou criar um novo\n");
         }
     }
 
     void clear(){
-        if(gene != 0){
-            delete [] gene;
-        }
-        gene = 0;
+        gene.clear();
         numberOfElements = 0;
     }
 
@@ -113,7 +101,7 @@ public:
     }
 
 private:
-    TIPO* gene; /*Conjunto de genes*/
+    vector<TIPO> gene; /*Conjunto de genes*/
     int idGene;
     double evaluation;
     int numberOfElements; /*Numero de elementos do gene*/
