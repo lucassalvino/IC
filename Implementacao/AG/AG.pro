@@ -34,4 +34,6 @@ HEADERS += \
     operators.hpp \
     calculateevaluation.h \
     utility.h \
-    generation.h
+    generation.h \
+    managergeneticalgorithm.h \
+    environment.h

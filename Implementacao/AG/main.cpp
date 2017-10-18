@@ -5,6 +5,9 @@ using namespace std;
 #include <time.h>
 #include "population.hpp"
 #include "calculateevaluation.h"
+#include "operators.hpp"
+#include "environment.h"
+#include "managergeneticalgorithm.h"
 #define FATOR 0.00004768372718899898
 
 class XCalculateEvaluation : public CalculateEvaluation<int>{
@@ -46,9 +49,10 @@ public:
 
 int main()
 {
-    Population<int> popu (new XGenerateGene(),new XCalculateEvaluation());
-    popu.initPopulation(20,10);
-    popu.printChomosomeOfPopulation();
+    ManagerGeneticAlgorithm<int> run;
+    Environment ambiente;
+    ambiente.setRateChange(0.001);
+    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,60,100,44);
     printf("\n\n...xau...\n\n");
     return 0;
 }

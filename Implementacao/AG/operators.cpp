@@ -1,14 +1,14 @@
 #include "operators.h"
 
 TEMPLATE
-Chromosome<TIPO> Operators::CrossOverOnePoint(Chromosome<TIPO> mother, Chromosome<TIPO> father)
+Chromosome<TIPO> Operators<TIPO>::CrossOverOnePoint(Chromosome<TIPO> mother, Chromosome<TIPO> father)
 {
     srand(time(0));
     return CrossOverOnePoint(mother,father,rand() % mother.getNumberOfElements());
 }
 
 TEMPLATE
-Chromosome<TIPO> Operators::CrossOverOnePoint(Chromosome<TIPO> mother, Chromosome<TIPO> father, int divisionPoint)
+Chromosome<TIPO> Operators<TIPO>::CrossOverOnePoint(Chromosome<TIPO> mother, Chromosome<TIPO> father, int divisionPoint)
 {
     if(mother.getNumberOfElements() != father.getNumberOfElements()) throw string("[ERROR] O numero de genes da mae deve ser igual ao numero de genes do pai");
     if(divisionPoint < 0 || divisionPoint > mother.getNumberOfElements()) throw string("[ERROR] O Ponto de Divisão não deve ser negativo ou maior que a quantidade de genes dos pais");
@@ -25,7 +25,7 @@ Chromosome<TIPO> Operators::CrossOverOnePoint(Chromosome<TIPO> mother, Chromosom
 }
 
 TEMPLATE
-Chromosome<TIPO> Operators::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father)
+Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father)
 {
     srand(time(0));
     int first, second;
@@ -34,7 +34,7 @@ Chromosome<TIPO> Operators::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosom
 }
 
 TEMPLATE
-Chromosome<TIPO> Operators::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father, int firstDivisionPoint, int secondDivisionPoint)
+Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father, int firstDivisionPoint, int secondDivisionPoint)
 {
     if(mother.getNumberOfElements() != father.getNumberOfElements()) throw string("[ERROR] O numero de genes da mae deve ser igual ao numero de genes do pai");
     if(firstDivisionPoint < 0 || firstDivisionPoint > mother.getNumberOfElements() || secondDivisionPoint < 0 || secondDivisionPoint > mother.getNumberOfElements()) throw string("[ERROR] O Ponto de Divisão não deve ser negativo ou maior que a quantidade de genes dos pais");
@@ -55,7 +55,7 @@ Chromosome<TIPO> Operators::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosom
 }
 
 TEMPLATE
-Chromosome<TIPO> Operators::Mutation(Chromosome<TIPO> chromos, double chance, GenerateGene<TIPO> *generateGene)
+Chromosome<TIPO> Operators<TIPO>::Mutation(Chromosome<TIPO> chromos, double chance, GenerateGene<TIPO> *generateGene)
 {
     if(chance < 0 || chance > 1) throw string ("A chance he uma porcentagem, deve estar entre 0 (0%) e 1 (100%).");
     Chromosome<TIPO> ret;
@@ -71,7 +71,7 @@ Chromosome<TIPO> Operators::Mutation(Chromosome<TIPO> chromos, double chance, Ge
 }
 
 TEMPLATE
-Operators::generateTwoDivisionPoints(int &firstDivisionPoint, int &secondDivisionPoint, int maxPoint)
+void Operators<TIPO>::generateTwoDivisionPoints(int &firstDivisionPoint, int &secondDivisionPoint, int maxPoint)
 {
     firstDivisionPoint = rand()%maxPoint;
     secondDivisionPoint = firstDivisionPoint + (rand()%(maxPoint - firstDivisionPoint));

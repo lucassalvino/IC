@@ -14,14 +14,6 @@ public:
         idGeneration =  value;
     }
 
-    double getMutationRate(){
-        return mutationRate;
-    }
-
-    void setMutationRate(double value){
-        mutationRate = value;
-    }
-
     double getEvaluationSum(){
         return evaluationSum;
     }
@@ -30,9 +22,17 @@ public:
         evaluationSum = value;
     }
 
+    Chromosome<TIPO> getBest(){
+        return best;
+    }
+
+    void setBest(const Chromosome<TIPO> value){
+        best = value;
+    }
+
 private:
     double evaluationSum;
     int idGeneration;
-    double mutationRate;
+    Chromosome<TIPO> best;
 };
 #endif // GENERATION_H

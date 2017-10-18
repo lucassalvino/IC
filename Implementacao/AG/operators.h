@@ -17,7 +17,7 @@ public:
     static Chromosome<TIPO> CrossOverTwoPoint(Chromosome<TIPO> mother,Chromosome<TIPO> father, int firstDivisionPoint, int secondDivisionPoint);
     static Chromosome<TIPO> Mutation(Chromosome<TIPO> chromos,double chance, GenerateGene<TIPO>* generateGene);
 private:
-    static generateTwoDivisionPoints(int& firstDivisionPoint, int& secondDivisionPoint,int maxPoint);
+    static void generateTwoDivisionPoints(int& firstDivisionPoint, int& secondDivisionPoint,int maxPoint);
 };
 
 #endif // OPERATORS_H
