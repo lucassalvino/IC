@@ -35,4 +35,5 @@ HEADERS += \
     utility.h \
     generation.h \
     managergeneticalgorithm.h \
-    environment.h
+    environment.h \
+    chromossomeoperators.h

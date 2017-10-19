@@ -28,7 +28,7 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
         double y = calculateEvaluation(*value,22,44);
         x=x*FATOR-100;
         y=y*FATOR-100;
-        value->setEvaluation(1/((x*x+y*y)+1));
+        value->setEvaluation(1.0/((x*x+y*y)+1.0));
         return value->getEvaluation();
     }
 };
