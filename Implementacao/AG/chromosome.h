@@ -103,7 +103,6 @@ public:
     void setIdGene(int value){
         idGene = value;
     }
-
 private:
     vector<TIPO> gene; /*Conjunto de genes*/
     int idGene;

@@ -1,5 +1,8 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
+#include <iostream>
+using namespace std;
+#include <stdio.h>
 class Environment{
 public:
     double getRateChange(){
@@ -8,6 +11,11 @@ public:
 
     void setRateChange(double value){
         rateChange = value;
+    }
+    string ToString(){
+        char aux [90]; *aux = 0;
+        sprintf(aux,"rateChange = %lf",rateChange);
+        return string(aux);
     }
 
 private:

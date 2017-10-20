@@ -10,11 +10,24 @@ using namespace std;
 #include "operators.hpp"
 #include "environment.h"
 #include "generation.h"
+#include <QDateTime>
 
 TEMPLATE
 class ManagerGeneticAlgorithm
 {
 public:
+    ManagerGeneticAlgorithm(){
+        saveLog = true;
+        folder = "log\\";
+    }
+    void setFolderLog(string fol){
+        this->folder = fol;
+    }
+
+    void setSaveLog(bool save){
+        this->saveLog = save;
+    }
+
     void runGeneticAlgorithm(GenerateGene<TIPO> *generateGene,CalculateEvaluation<TIPO>*calculateEval, Operators<TIPO>* operators,Environment enviromnent,int numGeneration,int sizePopulation, int numGenes){
         Population<TIPO> popu (generateGene, calculateEval, operators);
         popu.setEnvironment(enviromnent);
@@ -29,7 +42,8 @@ public:
             generation.setEvaluationSum(popu.getEvaluationSum());
             generation.setBest(popu.getBestChromosome());
             generations.push_back(generation);
-
+            if(saveLog)
+                save_Log(popu);
             popu.nextPopulation();
         }
 
@@ -41,6 +55,35 @@ public:
     }
 private:
     list<Generation<TIPO> > generations;
+    string folder;
+    bool saveLog;
+    int numGeneration;
+
+    void save_Log(Population<TIPO>& popu){
+        char aux[10];*aux = 0;
+        sprintf(aux,"%d",numGeneration);
+        string patch = QDateTime::currentDateTime().toString().toStdString();
+                patch+=string("generation_");
+                patch+=string(aux);
+                patch+=string(".log");
+        FILE* arq = fopen(patch.c_str(),"w");
+        if(arq == 0){
+            throw string("Nao he possivel abrir o arquivo de logs: ["+patch+"].");
+        }
+        fprintf(arq,"Ambiente:%s\n",popu.getEnvironment().ToString().c_str());
+        fprintf(arq,"ID Populacao[%d]\nNumero de elementos da populacao: [%d]\n",popu.getIdGeneration(),popu.getNumChromosomes());
+        fprintf(arq,"Somatorio fator de avaliação dos cromossomos: [%lf]\n",popu.getEvaluationSum());
+        fprintf(arq,"ID do melhor Cromossomo [%d]\n",popu.getBestChromosome().getIdGene());
+        for(int i = 0;i<popu.getNumChromosomes();i++){
+            Chromosome<TIPO> g = popu.getChromosomeAt(i);
+            fprintf(arq,"[%d]   [%lf]   [",g.getIdGene(),g.getEvaluation());
+            for(int j = 0; j<g.getNumberOfElements();j++){
+                fprintf(arq," %d ",g.getGeneAt(j));
+            }
+            fprintf(arq,"]\n");
+        }
+        fclose(arq);
+    }
 };
 
 #endif // MANAGERGENETICALGORITHM_H

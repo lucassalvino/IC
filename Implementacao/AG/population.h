@@ -33,7 +33,8 @@ public:
     void nextPopulation();
     Environment getEnvironment();
     void setEnvironment(Environment value);
-
+    int getNumChromosomes();
+    Chromosome<TIPO> getChromosomeAt(int index);
 private:
     int idGeneration;
     double evaluationSum;

@@ -116,6 +116,22 @@ void Population<TIPO>::setEnvironment(Environment value)
     environment = value;
 }
 
+TEMPLATE
+int Population<TIPO>::getNumChromosomes()
+{
+    return chromosomes.size();
+}
+
+TEMPLATE
+Chromosome<TIPO> Population<TIPO>::getChromosomeAt(int index)
+{
+    typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin();
+    if(chromosomes.size() > index && index >= 0)
+        for(;index!=0;index--)
+            it++;
+    return *it;
+}
+
 
 TEMPLATE
 void Population<TIPO>::CalculateNextPopulation()
