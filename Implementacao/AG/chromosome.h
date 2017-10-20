@@ -103,6 +103,12 @@ public:
     void setIdGene(int value){
         idGene = value;
     }
+    void swap(int i,int j){
+        TIPO aux = getGeneAt(i);
+        setGeneAt(i,getGeneAt(j));
+        setGeneAt(j,aux);
+    }
+
 private:
     vector<TIPO> gene; /*Conjunto de genes*/
     int idGene;

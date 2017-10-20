@@ -11,6 +11,7 @@ using namespace std;
 #include "environment.h"
 #include "generation.h"
 #include <QDateTime>
+#include <algorithm>
 
 TEMPLATE
 class ManagerGeneticAlgorithm
@@ -18,7 +19,7 @@ class ManagerGeneticAlgorithm
 public:
     ManagerGeneticAlgorithm(){
         saveLog = true;
-        folder = "log\\";
+        folder = "log/";
     }
     void setFolderLog(string fol){
         this->folder = fol;
@@ -36,7 +37,7 @@ public:
         popu.initPopulation(sizePopulation,numGenes);
         for(;i<numGeneration; i++){
             popu.CalculateNextPopulation();
-
+            this->numGeneration = i;
             Generation<TIPO> generation;
             generation.setIdGeneration(i);
             generation.setEvaluationSum(popu.getEvaluationSum());
@@ -46,7 +47,6 @@ public:
                 save_Log(popu);
             popu.nextPopulation();
         }
-
         /*resumo AG*/
         i = 0;
         for(typename list<Generation<TIPO> >::iterator it = generations.begin(); it!= generations.end();i++,it++){
@@ -62,10 +62,12 @@ private:
     void save_Log(Population<TIPO>& popu){
         char aux[10];*aux = 0;
         sprintf(aux,"%d",numGeneration);
-        string patch = QDateTime::currentDateTime().toString().toStdString();
+        string patch = folder+QDateTime::currentDateTime().toString().toStdString();
                 patch+=string("generation_");
                 patch+=string(aux);
                 patch+=string(".log");
+        replace(patch.begin(),patch.end(),':','_');
+        replace(patch.begin(),patch.end(),' ','_');
         FILE* arq = fopen(patch.c_str(),"w");
         if(arq == 0){
             throw string("Nao he possivel abrir o arquivo de logs: ["+patch+"].");

@@ -55,19 +55,16 @@ Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chr
 }
 
 TEMPLATE
-Chromosome<TIPO> Operators<TIPO>::Mutation(Chromosome<TIPO> chromos, double chance, GenerateGene<TIPO> *generateGene)
+Chromosome<TIPO> Operators<TIPO>::Mutation(Chromosome<TIPO> chromos, double chance)
 {
     if(chance < 0 || chance > 1) throw string ("A chance he uma porcentagem, deve estar entre 0 (0%) e 1 (100%).");
-    Chromosome<TIPO> ret;
-    ret.setNumberOfElements(chromos.getNumberOfElements());
-    for(int i=0;i<chromos.getNumberOfElements();i++){
+    int n = chromos.getNumberOfElements();
+    for(int i=0;i< n;i++){
         if(Utility::fRand(0,1) < chance){
-            ret.setGeneAt(i,generateGene->getRandomGene());
-        }else{
-            ret.setGeneAt(i,chromos.getGeneAt(i));
+            chromos.swap(rand()%n,rand()%n);
         }
     }
-    return ret;
+    return chromos;
 }
 
 TEMPLATE

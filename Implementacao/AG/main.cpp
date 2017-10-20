@@ -51,7 +51,7 @@ int main()
 {
     ManagerGeneticAlgorithm<int> run;
     Environment ambiente;
-    ambiente.setRateChange(0.001);
+    ambiente.setRateChange(0.01);
     run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,60,100,44);
     printf("\n\n...xau...\n\n");
     return 0;

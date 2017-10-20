@@ -1,6 +1,7 @@
 #ifndef CHROMOSSOMEOPERATORS_H
 #define CHROMOSSOMEOPERATORS_H
 #include "chromosome.h"
+
 TEMPLATE
 class ChromossomeOperators
 {
@@ -20,6 +21,12 @@ public:
     }
     static void attribution(Chromosome<TIPO> destiny,Chromosome<TIPO> source){
         destiny = source;
+    }
+    static void swap(TIPO &a,TIPO &b){
+        TIPO c;
+        c = a;
+        a = b;
+        b = c;
     }
 };
 #endif // CHROMOSSOMEOPERATORS_H
