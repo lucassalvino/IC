@@ -43,7 +43,7 @@ TEMPLATE
 Chromosome<TIPO> Population<TIPO>::getBestChromosome()
 {
     Chromosome<TIPO>* ret;
-    double bestEvaluation = 0;
+    double bestEvaluation = -9000;
     this->updateEvaluationSum();
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         if(it->getEvaluation() > bestEvaluation){
@@ -139,9 +139,9 @@ void Population<TIPO>::CalculateNextPopulation()
     new_chromosomes.clear();
     updateEvaluationSum();
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
-        Chromosome<TIPO> son = operators->CrossOverOnePoint(*it,roulette());
-        son = operators->Mutation(son,environment.getRateChange());
+        Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,roulette());
         son.setIdGene(this->idGeneration++);
+        son = operators->Mutation(son,environment.getRateChange());
         new_chromosomes.push_back(son);
     }
 }
