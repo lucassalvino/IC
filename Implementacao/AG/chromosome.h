@@ -13,6 +13,8 @@ class Chromosome
 public:
     Chromosome(){
         numberOfElements = -1;
+        evaluation = 0;
+        idGene = -1;
     }
 
     ~Chromosome(){
@@ -87,6 +89,7 @@ public:
     void clear(){
         gene.clear();
         numberOfElements = -1;
+        evaluation = 0;
     }
 
     double getEvaluation(){
