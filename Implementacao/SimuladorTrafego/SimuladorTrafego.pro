@@ -9,7 +9,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    manager.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -23,4 +24,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    Data/config.h
+    Xdata.h \
+    manager.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/release/ -lBasisForDeveloping
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/debug/ -lBasisForDeveloping
+else:unix: LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/ -lBasisForDeveloping
+
+INCLUDEPATH += $$PWD/../../../BasisForDeveloping
+DEPENDPATH += $$PWD/../../../BasisForDeveloping
