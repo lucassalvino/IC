@@ -1,0 +1,48 @@
+#include "edge.h"
+
+BaseGraph::Edge::Edge()
+{
+    origin = 0;
+    destiny = 0;
+    distance = 0;
+}
+
+void BaseGraph::Edge::setOrigin(Vertex *value)
+{
+    if (value == 0) throw std::string("O ponteiro para o vertice de origem nao pode ser nulo");
+    origin = value;
+}
+
+void BaseGraph::Edge::setDestiny(Vertex *value)
+{
+    if (value == 0) throw std::string("O ponteiro para o vertice de destino nao pode ser nulo");
+    destiny = value;
+}
+
+void BaseGraph::Edge::setDistance(double value)
+{
+    distance = value;
+}
+
+BaseGraph::Vertex *BaseGraph::Edge::getOrigin() const
+{
+    return origin;
+}
+
+BaseGraph::Vertex *BaseGraph::Edge::getDestiny() const
+{
+    return destiny;
+}
+
+double BaseGraph::Edge::getDistance() const
+{
+    return distance;
+}
+
+std::pair<int, int> BaseGraph::Edge::getOriginDestiny()
+{
+    if(origin && destiny)
+        return std::pair<int ,int>(origin->getId(), destiny->getId());
+    else
+        throw std::string("Ainda nao foi realizado o set da origem ou do destino");
+}

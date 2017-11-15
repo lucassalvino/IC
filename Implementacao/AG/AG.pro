@@ -11,7 +11,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     population.cpp \
-    operators.cpp
+    operators.cpp \
+    Graph/customalgorithm.cpp \
+    Graph/edge.cpp \
+    Graph/graph.cpp \
+    Graph/vertex.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -36,4 +40,8 @@ HEADERS += \
     generation.h \
     managergeneticalgorithm.h \
     environment.h \
-    chromossomeoperators.h
+    chromossomeoperators.h \
+    Graph/customalgorithm.h \
+    Graph/edge.h \
+    Graph/graph.h \
+    Graph/vertex.h
