@@ -1,6 +1,6 @@
 #include "customalgorithm.h"
 
-BaseGraph::CustomAlgorithm::CustomAlgorithm(const Graph *pointerGraph)
+BaseGraph::CustomAlgorithm::CustomAlgorithm(Graph *pointerGraph)
 {
     graph = 0;
     if(pointerGraph == 0)
@@ -18,7 +18,7 @@ void BaseGraph::CustomAlgorithm::execute()
     throw std::string("ainda nao foi implementado");
 }
 
-void BaseGraph::CustomAlgorithm::setInstanceGraph(const Graph *pointerGraph)
+void BaseGraph::CustomAlgorithm::setInstanceGraph(Graph *pointerGraph)
 {
     if(pointerGraph == 0)
         throw std::string("He necessario informar um grafo valido");

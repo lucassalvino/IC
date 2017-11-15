@@ -24,17 +24,17 @@ void BaseGraph::Edge::setDistance(double value)
     distance = value;
 }
 
-BaseGraph::Vertex *BaseGraph::Edge::getOrigin() const
+BaseGraph::Vertex *BaseGraph::Edge::getOrigin()
 {
     return origin;
 }
 
-BaseGraph::Vertex *BaseGraph::Edge::getDestiny() const
+BaseGraph::Vertex *BaseGraph::Edge::getDestiny()
 {
     return destiny;
 }
 
-double BaseGraph::Edge::getDistance() const
+double BaseGraph::Edge::getDistance()
 {
     return distance;
 }

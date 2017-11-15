@@ -15,19 +15,21 @@ public:
     void clear();
     void loadFromFile(std::string source);
     void saveInFile(std::string source);
-    const Edge *getEdge(int origin, int destiny) const;
-    const Edge *getEdge(Vertex origin, Vertex destiny) const;
-    const Edge *getEdge(int index) const;
-    int getIDVertex(int value) const;
-    int getIDVertexIndex(int index) const;
-    int getNumEdge() const;
-    int getNumVertex() const;
-    double **getMatrix() const;
+    Edge *getEdge(int origin, int destiny);
+    Edge *getEdge(Vertex origin, Vertex destiny);
+    Edge *getEdge(int index);
+    int getIDVertex(int value);
+    int getIDVertexIndex(int index);
+    int getNumEdge();
+    int getNumVertex();
+    double **getMatrix();
 protected:
-    std::set<int> vertex;
-    std::set<Edge> edges;
+    std::vector<int> vertex;
+    std::vector<Edge> edges;
     void addEdge(Edge value);
     void addEdge(Vertex *origin, Vertex *destiny, double distance);
+private:
+    void addVertex(int id);
 };
 }
 #endif // GRAPH_H

@@ -5,12 +5,12 @@ namespace  BaseGraph {
 class CustomAlgorithm
 {
 public:
-    CustomAlgorithm(const Graph *pointerGraph);
+    CustomAlgorithm(Graph *pointerGraph);
     CustomAlgorithm();
     virtual void execute();
-    void setInstanceGraph(const Graph* pointerGraph);
+    void setInstanceGraph(Graph *pointerGraph);
 protected:
-    const Graph* graph;
+    Graph* graph;
 private:
     void checkInstanceGraph();
     double getDistance(int a, int b);

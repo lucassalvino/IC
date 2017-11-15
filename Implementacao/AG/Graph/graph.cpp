@@ -13,15 +13,23 @@ void BaseGraph::Graph::addEdge(Vertex* origin, Vertex* destiny, double distance)
     addEdge(add);
 }
 
+void BaseGraph::Graph::addVertex(int id)
+{
+    for(int i = 0; i < (int)vertex.size(); i++){
+        if(vertex[i] == id)return;
+    }
+    vertex.push_back(id);
+}
+
 void BaseGraph::Graph::addEdge(int origin, int destiny, double distance)
 {
    addEdge(new Vertex(origin), new Vertex(destiny), distance);
 }
 
 void BaseGraph::Graph::addEdge(Edge value){
-    vertex.insert(value.getOrigin()->getId());
-    vertex.insert(value.getDestiny()->getId());
-    edges.insert(value);
+    addVertex(value.getOrigin()->getId());
+    addVertex(value.getDestiny()->getId());
+    edges.push_back(value);
 }
 
 void BaseGraph::Graph::clear(){
@@ -43,7 +51,7 @@ void BaseGraph::Graph::loadFromFile(std::string source){
 void BaseGraph::Graph::saveInFile(std::string source){
     FILE* arq = fopen(source.c_str(), "w");
     if(arq == 0) throw std::string("Source ["+source+"] not found");
-    std::set<Edge>::iterator it = edges.begin();
+    std::vector<Edge>::iterator it = edges.begin();
     for(;it != edges.end(); it++){
         int origin, destiny;
         double distance;
@@ -55,24 +63,25 @@ void BaseGraph::Graph::saveInFile(std::string source){
     fclose(arq);
 }
 
-const BaseGraph::Edge *BaseGraph::Graph::getEdge(int origin, int destiny) const
+BaseGraph::Edge* BaseGraph::Graph::getEdge(int origin, int destiny)
 {
-    std::set<Edge>::iterator it = edges.begin();
+    std::vector<Edge>::iterator it = edges.begin();
     for(;it != edges.end(); it++){
-        if(origin == it->getOrigin()->getId() && destiny == it->getDestiny()->getId())
+        if(origin == it->getOrigin()->getId() && destiny == it->getDestiny()->getId()){
             return &(*it);
+        }
     }
     return 0;
 }
 
-const BaseGraph::Edge *BaseGraph::Graph::getEdge(Vertex origin, Vertex destiny) const
+BaseGraph::Edge* BaseGraph::Graph::getEdge(Vertex origin, Vertex destiny)
 {
     return getEdge(origin.getId(), destiny.getId());
 }
 
-const BaseGraph::Edge *BaseGraph::Graph::getEdge(int index) const
+BaseGraph::Edge *BaseGraph::Graph::getEdge(int index)
 {
-    std::set<Edge>::iterator it = edges.begin();
+    std::vector<Edge>::iterator it = edges.begin();
     for(int i = 0;it != edges.end();i++, it++){
         if(i == index)
             return &(*it);
@@ -80,37 +89,37 @@ const BaseGraph::Edge *BaseGraph::Graph::getEdge(int index) const
     return 0;
 }
 
-int BaseGraph::Graph::getIDVertex(int value) const
+int BaseGraph::Graph::getIDVertex(int value)
 {
-    std::set<int>::iterator it = vertex.begin();
+    std::vector<int>::iterator it = vertex.begin();
     for(;it != vertex.end(); it++){
         if(value == (*it)) return (*it);
     }
     return -1;
 }
 
-int BaseGraph::Graph::getIDVertexIndex(int index) const
+int BaseGraph::Graph::getIDVertexIndex(int index)
 {
-    std::set<int>::iterator it = vertex.begin();
+    std::vector<int>::iterator it = vertex.begin();
     for(int i = 0;it != vertex.end(); it++, i++){
         if(i == index) return (*it);
     }
     return -1;
 }
 
-int BaseGraph::Graph::getNumEdge() const
+int BaseGraph::Graph::getNumEdge()
 {
     return edges.size();
 }
 
-int BaseGraph::Graph::getNumVertex() const
+int BaseGraph::Graph::getNumVertex()
 {
     return vertex.size();
 }
 
-double **BaseGraph::Graph::getMatrix() const
+double **BaseGraph::Graph::getMatrix()
 {
-    std::set<Edge>::iterator it = edges.begin();
+    std::vector<Edge>::iterator it = edges.begin();
     double ** ret = new double*[vertex.size()];
     for(int i = 0;i < (int)vertex.size();i++) ret[i] = new double[vertex.size()];
     for(int i = 0;i<(int)vertex.size();i++)

@@ -9,12 +9,7 @@ public:
     Vertex();
     Vertex(int id);
     void setId(int value);
-    int getId() const;
-
-    bool operator< (const Vertex& e) const{ /*implementado para comparacoes na set*/
-        if(e.getId() != getId())return true;
-        return false;
-    }
+    int getId();
 private:
     int ID;
 protected:

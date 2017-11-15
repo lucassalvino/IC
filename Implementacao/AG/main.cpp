@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stdio.h>
-using namespace std;
 #include <random>
 #include <time.h>
 #include "population.hpp"
@@ -8,7 +7,13 @@ using namespace std;
 #include "operators.hpp"
 #include "environment.h"
 #include "managergeneticalgorithm.h"
+#include "Graph/graph.h"
+#include <time.h>
 #define FATOR 0.00004768372718899898
+using namespace BaseGraph;
+using namespace std;
+Graph graf;
+int numeroVerticeDestino = 0;
 
 class XCalculateEvaluation : public CalculateEvaluation<int>{
     virtual double calculateEvaluation(Chromosome<int> value,int init, int final) override {
@@ -16,19 +21,21 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
     }
 
     virtual double calculateEvaluation(Chromosome<int> value) override {
-        double ret = 0;
-        for(int i = 0; i < value.getNumberOfElements(); i++){
-            ret*=2;
-            if(value.getGeneAt(i) == 1) ret+=1;
-        }
-        return ret;
+        return 0;
     }
     virtual double getEvaluation(Chromosome<int>* value) override{
-        double x = calculateEvaluation(*value,0,21);
-        double y = calculateEvaluation(*value,22,44);
-        x=x*FATOR-100;
-        y=y*FATOR-100;
-        value->setEvaluation(1.0/((x*x+y*y)+1.0));
+        int numVertex = 0;
+        for(int i = 0,noAtual = 0; i < value->getNumberOfElements() - 1; i++){
+            Edge* ver = graf.getEdge(value->getGeneAt(noAtual), value->getGeneAt(noAtual+1));
+            if (ver!=0){
+                numVertex ++;
+                if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
+                    numVertex = graf.getNumVertex();
+                }
+            }
+            else break;
+        }
+        value->setEvaluation(numVertex / graf.getNumVertex());
         return value->getEvaluation();
     }
 };
@@ -36,24 +43,34 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
 class XGenerateGene : public GenerateGene<int>{
 public:
     int getRandomGene() override{
-        default_random_engine generator;
-        generator.seed(rand()/3.141525);
-        exponential_distribution<double> distribution(1);
-        if(distribution(generator) < 0.5)
-            return 1;
-        else
-            return 0;
+        return random()%graf.getNumVertex();
     }
 };
 
 
+void criaGrafo(Graph& graf){
+    graf.addEdge(0,1,1);
+    graf.addEdge(1,2,1);
+    graf.addEdge(0,3,1);
+    graf.addEdge(3,4,1);
+    graf.addEdge(4,2,1);
+}
+
 int main()
 {
+    try{
+    srand(time(0));
+    criaGrafo(graf);
+    printf ("Digite o valor ");
     ManagerGeneticAlgorithm<int> run;
     Environment ambiente;
     ambiente.setRateChange(0.01);
     run.setSaveLog(false);
-    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,60,100,44);
+    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,100,100,graf.getNumVertex());
     printf("\n\n...xau...\n\n");
+    }
+    catch (string erro){
+        printf("[ERRO]Exectando Main: [%s]\n", erro.c_str());
+    }
     return 0;
 }

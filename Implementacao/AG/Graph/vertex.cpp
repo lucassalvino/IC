@@ -16,7 +16,7 @@ void BaseGraph::Vertex::setId(int value)
     ID = value;
 }
 
-int BaseGraph::Vertex::getId() const
+int BaseGraph::Vertex::getId()
 {
     return ID;
 }

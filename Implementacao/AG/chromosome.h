@@ -25,7 +25,7 @@ public:
         return gene;
     }
 
-    virtual TIPO getGeneAt(int index)
+    virtual TIPO getGeneAt(int index) const
     {
         if(index < 0 || index >= this->numberOfElements)
             throw string("[index] he invalido, ou variaveis cromossomo nao inicializado");
@@ -113,9 +113,9 @@ public:
     }
 
 private:
-    vector<TIPO> gene; /*Conjunto de genes*/
-    int idGene;
-    double evaluation;
-    int numberOfElements; /*Numero de elementos do gene*/
+    mutable vector<TIPO> gene; /*Conjunto de genes*/
+    mutable int idGene;
+    mutable double evaluation;
+    mutable int numberOfElements; /*Numero de elementos do gene*/
 };
 #endif // CHROMOSOME_H
