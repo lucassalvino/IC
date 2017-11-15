@@ -14,6 +14,7 @@ using namespace BaseGraph;
 using namespace std;
 Graph graf;
 int numeroVerticeDestino = 0;
+int numeroVerticeOrigem = 0;
 
 class XCalculateEvaluation : public CalculateEvaluation<int>{
     virtual double calculateEvaluation(Chromosome<int> value,int init, int final) override {
@@ -33,7 +34,9 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                     numVertex = graf.getNumVertex();
                 }
             }
-            else break;
+            else{
+                numVertex = 0;
+            }
         }
         value->setEvaluation(numVertex / graf.getNumVertex());
         return value->getEvaluation();
@@ -61,7 +64,8 @@ int main()
     try{
     srand(time(0));
     criaGrafo(graf);
-    printf ("Digite o valor ");
+    printf ("Digite o vertice de Origem: "); scanf ("%d", &numeroVerticeOrigem);
+    printf ("Digite o vertice de Destino: "); scanf ("%d", &numeroVerticeDestino);
     ManagerGeneticAlgorithm<int> run;
     Environment ambiente;
     ambiente.setRateChange(0.01);
