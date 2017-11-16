@@ -66,14 +66,22 @@ public:
         ret.setNumberOfElements(numGenes);
         ret.setGeneAt(0,numeroVerticeOrigem);
         int ultimoGene = numeroVerticeOrigem;
+        bool jaAdicionado[graf.getNumVertex()] ={0};
+        jaAdicionado[numeroVerticeOrigem] = 1;
         for(int i = 1; i<numGenes; i++){
-            int destino = rand()%graf.getNumVertex();
-            for(int j=0; j<graf.getNumVertex(); j++){
+            int destino;
+            for(int j=0; j<graf.getNumVertex();j++){
+                destino = rand()%graf.getNumVertex();
                 Edge* ten = graf.getEdge(ultimoGene,destino);
-                if(ten != 0)break;
-                destino = j;//caso nao exista, tenta os vertices do grafo
+                if(ten == 0 && j == graf.getNumVertex() && !jaAdicionado[destino]){
+                    printf("[WARNING] Impossivel gerar cromossomo em [%s]",__FUNCTION__);
+                    destino = -1;
+                    break;
+                }
+                if(ten != 0 && !jaAdicionado[destino])break;
             }
             ret.setGeneAt(i,destino);
+            jaAdicionado[destino] = true;
         }
         return ret;
     }
