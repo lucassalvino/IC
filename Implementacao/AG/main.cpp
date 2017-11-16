@@ -55,8 +55,9 @@ public:
 
 class XGenerateRandomChromosome : public GenerateRandomChromosome<int>{
 public:
-    Chromosome<int> GenerateChromosome(int numGenes) override{
+    Chromosome<int> GenerateChromosome(int numGenes, int ID) override{
         Chromosome<int> ret ;
+        ret.setIdGene(ID);
         ret.setNumberOfElements(numGenes);
         ret.setGeneAt(0,numeroVerticeOrigem);
         for(int i = 1; i<numGenes; i++){

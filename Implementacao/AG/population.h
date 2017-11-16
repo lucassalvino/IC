@@ -17,7 +17,7 @@ using namespace std;
 TEMPLATE
 class GenerateRandomChromosome{
 public:
-    virtual Chromosome<TIPO> GenerateChromosome(int numGenes){}
+    virtual Chromosome<TIPO> GenerateChromosome(int numGenes, int ID){}
 };
 
 TEMPLATE

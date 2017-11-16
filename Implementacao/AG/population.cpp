@@ -64,7 +64,7 @@ void Population<TIPO>::initPopulation(int sizePopulation, int numGenes)
 {
     if(getChromossome == 0)throw string ("He necessario setar o gerador de Cromossomos");
     for(int i = 0; i<sizePopulation; i++){
-        this->chromosomes.push_back(getChromossome->GenerateChromosome(numGenes));
+        this->chromosomes.push_back(getChromossome->GenerateChromosome(numGenes,i));
     }
 }
 
