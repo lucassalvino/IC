@@ -29,8 +29,8 @@ public:
         this->saveLog = save;
     }
 
-    void runGeneticAlgorithm(GenerateGene<TIPO> *generateGene,CalculateEvaluation<TIPO>*calculateEval, Operators<TIPO>* operators,Environment enviromnent,int numGeneration,int sizePopulation, int numGenes){
-        Population<TIPO> popu (generateGene, calculateEval, operators);
+    void runGeneticAlgorithm(GenerateGene<TIPO> *generateGene,CalculateEvaluation<TIPO>*calculateEval, Operators<TIPO>* operators,Environment enviromnent,GenerateRandomChromosome<TIPO>* generateRandomChormossome,int numGeneration,int sizePopulation, int numGenes){
+        Population<TIPO> popu (generateGene, calculateEval, operators, generateRandomChormossome);
         popu.setEnvironment(enviromnent);
         int i = 0;
         popu.setIdGeneration(i);

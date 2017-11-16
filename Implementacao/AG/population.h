@@ -14,12 +14,17 @@
 #include "environment.h"
 
 using namespace std;
+TEMPLATE
+class GenerateRandomChromosome{
+public:
+    virtual Chromosome<TIPO> GenerateChromosome(int numGenes){}
+};
 
 TEMPLATE
 class Population
 {
 public:
-    Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc, Operators<TIPO>* operato);
+    Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc, Operators<TIPO>* operato, GenerateRandomChromosome<TIPO>* generateCromossome);
     ~Population();
     void evaluationAll();
     void initPopulation(int sizePopulation, int numGenes);
@@ -45,6 +50,7 @@ private:
     CalculateEvaluation<TIPO>* calculateEvaluation;
     Operators<TIPO>* operators;
     Environment environment;
+    GenerateRandomChromosome<TIPO>* getChromossome;
 };
 
 #endif // POPULATION_H

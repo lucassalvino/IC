@@ -1,12 +1,17 @@
 #include "population.h"
 
 TEMPLATE
-Population<TIPO>::Population(GenerateGene<TIPO> *ge, CalculateEvaluation<TIPO>*calc, Operators<TIPO> *operato)
+Population<TIPO>::Population(GenerateGene<TIPO> *ge, CalculateEvaluation<TIPO>*calc, Operators<TIPO> *operato, GenerateRandomChromosome<TIPO> *generateCromossome)
 {
+    if(ge == 0) throw string("GenerateGene esta nulo");
+    if(calc == 0) throw string("CalculateEvaluation esta nulo");
+    if(operato == 0) throw string("Operators esta nulo");
+    if(generateCromossome == 0) throw string("GenerateRandomChromosome esta nulo");
     getGene = ge;
     calculateEvaluation = calc;
     operators = operato;
     idGeneration = -1;
+    getChromossome = generateCromossome;
 }
 
 TEMPLATE
@@ -57,11 +62,9 @@ Chromosome<TIPO> Population<TIPO>::getBestChromosome()
 TEMPLATE
 void Population<TIPO>::initPopulation(int sizePopulation, int numGenes)
 {
+    if(getChromossome == 0)throw string ("He necessario setar o gerador de Cromossomos");
     for(int i = 0; i<sizePopulation; i++){
-        Chromosome<TIPO> add;
-        add.generateRandom(this->getGene,numGenes);
-        add.setIdGene(i);
-        this->chromosomes.push_back(add);
+        this->chromosomes.push_back(getChromossome->GenerateChromosome(numGenes));
     }
 }
 

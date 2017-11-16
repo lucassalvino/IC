@@ -26,18 +26,21 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
     }
     virtual double getEvaluation(Chromosome<int>* value) override{
         int numVertex = 0;
-        for(int i = 0,noAtual = 0; i < value->getNumberOfElements() - 1; i++){
-            Edge* ver = graf.getEdge(value->getGeneAt(noAtual), value->getGeneAt(noAtual+1));
-            if (ver!=0){
-                numVertex ++;
-                if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
-                    numVertex = graf.getNumVertex();
+        if(value->getGeneAt(0) != numeroVerticeOrigem){
+            numVertex = 0;
+        }else
+            for(int i = 0,noAtual = 0; i < value->getNumberOfElements() - 1; i++){
+                Edge* ver = graf.getEdge(value->getGeneAt(noAtual), value->getGeneAt(noAtual+1));
+                if (ver!=0){
+                    numVertex ++;
+                    if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
+                        numVertex = graf.getNumVertex();
+                    }
+                }
+                else{
+                    numVertex = 0;
                 }
             }
-            else{
-                numVertex = 0;
-            }
-        }
         value->setEvaluation(numVertex / graf.getNumVertex());
         return value->getEvaluation();
     }
@@ -50,6 +53,18 @@ public:
     }
 };
 
+class XGenerateRandomChromosome : public GenerateRandomChromosome<int>{
+public:
+    Chromosome<int> GenerateChromosome(int numGenes) override{
+        Chromosome<int> ret ;
+        ret.setNumberOfElements(numGenes);
+        ret.setGeneAt(0,numeroVerticeOrigem);
+        for(int i = 1; i<numGenes; i++){
+            ret.setGeneAt(i,random()%graf.getNumVertex());
+        }
+        return ret;
+    }
+};
 
 void criaGrafo(Graph& graf){
     graf.addEdge(0,1,1);
@@ -62,16 +77,16 @@ void criaGrafo(Graph& graf){
 int main()
 {
     try{
-    srand(time(0));
-    criaGrafo(graf);
-    printf ("Digite o vertice de Origem: "); scanf ("%d", &numeroVerticeOrigem);
-    printf ("Digite o vertice de Destino: "); scanf ("%d", &numeroVerticeDestino);
-    ManagerGeneticAlgorithm<int> run;
-    Environment ambiente;
-    ambiente.setRateChange(0.01);
-    run.setSaveLog(false);
-    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,100,100,graf.getNumVertex());
-    printf("\n\n...xau...\n\n");
+        srand(time(0));
+        criaGrafo(graf);
+        printf ("Digite o vertice de Origem: "); scanf ("%d", &numeroVerticeOrigem);
+        printf ("Digite o vertice de Destino: "); scanf ("%d", &numeroVerticeDestino);
+        ManagerGeneticAlgorithm<int> run;
+        Environment ambiente;
+        ambiente.setRateChange(0.01);
+        run.setSaveLog(false);
+        run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,new XGenerateRandomChromosome(),100,100,graf.getNumVertex());
+        printf("\n\n...xau...\n\n");
     }
     catch (string erro){
         printf("[ERRO]Exectando Main: [%s]\n", erro.c_str());

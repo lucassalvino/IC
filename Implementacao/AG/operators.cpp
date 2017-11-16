@@ -27,7 +27,6 @@ Chromosome<TIPO> Operators<TIPO>::CrossOverOnePoint(Chromosome<TIPO> mother, Chr
 TEMPLATE
 Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father)
 {
-    srand(time(0));
     int first, second;
     generateTwoDivisionPoints(first,second,mother.getNumberOfElements());
     return CrossOverTwoPoint(mother,father,first,second);
