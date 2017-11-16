@@ -65,8 +65,15 @@ public:
         ret.setIdGene(ID);
         ret.setNumberOfElements(numGenes);
         ret.setGeneAt(0,numeroVerticeOrigem);
+        int ultimoGene = numeroVerticeOrigem;
         for(int i = 1; i<numGenes; i++){
-            ret.setGeneAt(i,random()%graf.getNumVertex());
+            int destino = random()%graf.getNumVertex();
+            for(int j=0; j<graf.getNumVertex(); j++){
+                Edge* ten = graf.getEdge(ultimoGene,destino);
+                if(ten != 0)break;
+                destino = j;//caso nao exista, tenta os vertices do grafo
+            }
+            ret.setGeneAt(i,destino);
         }
         return ret;
     }
@@ -78,7 +85,6 @@ void criaGrafo(Graph& graf){
     graf.addEdge(0,3,1);
     graf.addEdge(3,4,1);
     graf.addEdge(4,2,1);
-    printf("%d\n", graf.getEdge(1)->getOrigin()->numberAdjacents());
 }
 
 int main()

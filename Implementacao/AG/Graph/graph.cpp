@@ -21,9 +21,22 @@ void BaseGraph::Graph::addVertex(int id)
     vertex.push_back(id);
 }
 
+BaseGraph::Vertex *BaseGraph::Graph::getVertex(int id)
+{
+    for(int i = 0; i<(int)vertex.size(); i++){
+        if(id == vertex[i]){/*vertex ja existe*/
+            for(int j = 0; j != (int)edges.size(); j++){
+                if(edges[j].getOrigin()->getId() == id)return edges[j].getOrigin();
+                if(edges[j].getDestiny()->getId() == id)return edges[j].getOrigin();
+            }
+        }
+    }
+    return new Vertex(id);
+}
+
 void BaseGraph::Graph::addEdge(int origin, int destiny, double distance)
 {
-   addEdge(new Vertex(origin), new Vertex(destiny), distance);
+   addEdge(getVertex(origin), getVertex(destiny), distance);
 }
 
 void BaseGraph::Graph::addEdge(Edge value){

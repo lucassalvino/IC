@@ -30,6 +30,7 @@ protected:
     void addEdge(Vertex *origin, Vertex *destiny, double distance);
 private:
     void addVertex(int id);
+    Vertex* getVertex(int id);
 };
 }
 #endif // GRAPH_H
