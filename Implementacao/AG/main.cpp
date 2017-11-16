@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <random>
 #include <time.h>
+#include <stdlib.h>
 #include "population.hpp"
 #include "calculateevaluation.h"
 #include "operators.hpp"
@@ -35,11 +36,11 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                     numVertex ++;
                     if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
                         numVertex = graf.getNumVertex();
-                        printf("ENCONTREI O CAMINHO!!!! Cromossomo de ID[%d]: \n",value->getIdGene());
+                        /*printf("ENCONTREI O CAMINHO!!!! Cromossomo de ID[%d]: \n",value->getIdGene());
                         for(int j = 0; j<=i+1; j++)
                             printf("[%d] -> ",value->getGeneAt(j));
                         printf("FIM\n\n");
-                        exit(0);
+                        //exit(0);*/
                     }
                 }
                 else{
@@ -54,7 +55,7 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
 class XGenerateGene : public GenerateGene<int>{
 public:
     int getRandomGene() override{
-        return random()%graf.getNumVertex();
+        return rand()%graf.getNumVertex();
     }
 };
 
@@ -67,7 +68,7 @@ public:
         ret.setGeneAt(0,numeroVerticeOrigem);
         int ultimoGene = numeroVerticeOrigem;
         for(int i = 1; i<numGenes; i++){
-            int destino = random()%graf.getNumVertex();
+            int destino = rand()%graf.getNumVertex();
             for(int j=0; j<graf.getNumVertex(); j++){
                 Edge* ten = graf.getEdge(ultimoGene,destino);
                 if(ten != 0)break;
