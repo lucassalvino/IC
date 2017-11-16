@@ -27,7 +27,7 @@ BaseGraph::Vertex *BaseGraph::Graph::getVertex(int id)
         if(id == vertex[i]){/*vertex ja existe*/
             for(int j = 0; j != (int)edges.size(); j++){
                 if(edges[j].getOrigin()->getId() == id)return edges[j].getOrigin();
-                if(edges[j].getDestiny()->getId() == id)return edges[j].getOrigin();
+                if(edges[j].getDestiny()->getId() == id)return edges[j].getDestiny();
             }
         }
     }

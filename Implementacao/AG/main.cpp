@@ -10,7 +10,6 @@
 #include "managergeneticalgorithm.h"
 #include "Graph/graph.h"
 #include <time.h>
-#define FATOR 0.00004768372718899898
 using namespace BaseGraph;
 using namespace std;
 Graph graf;
@@ -36,11 +35,11 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                     numVertex ++;
                     if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
                         numVertex = graf.getNumVertex();
-                        /*printf("ENCONTREI O CAMINHO!!!! Cromossomo de ID[%d]: \n",value->getIdGene());
+                        printf("ENCONTREI O CAMINHO!!!! Cromossomo de ID[%d]: \n",value->getIdGene());
                         for(int j = 0; j<=i+1; j++)
                             printf("[%d] -> ",value->getGeneAt(j));
                         printf("FIM\n\n");
-                        //exit(0);*/
+                        exit(0);
                     }
                 }
                 else{
@@ -86,6 +85,7 @@ void criaGrafo(Graph& graf){
     graf.addEdge(0,3,1);
     graf.addEdge(3,4,1);
     graf.addEdge(4,2,1);
+    graf.saveInFile(string("C:/DEMETER/grafo.txt"));
 }
 
 int main()
