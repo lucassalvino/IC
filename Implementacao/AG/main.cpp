@@ -35,6 +35,11 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                     numVertex ++;
                     if(value->getGeneAt(noAtual+1) == numeroVerticeDestino){
                         numVertex = graf.getNumVertex();
+                        printf("ENCONTREI O CAMINHO!!!! Cromossomo de ID[%d]: \n",value->getIdGene());
+                        for(int j = 0; j<=i+1; j++)
+                            printf("[%d] -> ",value->getGeneAt(j));
+                        printf("FIM\n\n");
+                        exit(0);
                     }
                 }
                 else{
