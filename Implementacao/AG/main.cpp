@@ -78,6 +78,7 @@ void criaGrafo(Graph& graf){
     graf.addEdge(0,3,1);
     graf.addEdge(3,4,1);
     graf.addEdge(4,2,1);
+    printf("%d\n", graf.getEdge(1)->getOrigin()->numberAdjacents());
 }
 
 int main()

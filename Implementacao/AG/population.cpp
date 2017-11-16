@@ -142,7 +142,8 @@ void Population<TIPO>::CalculateNextPopulation()
     new_chromosomes.clear();
     updateEvaluationSum();
     if(evaluationSum == 0){
-        printf("\n[PERIGO] A populacao [%d] esta com nenhum individuo valido\n\n",this->idGeneration);
+        printf("\n[PERIGO] A populacao [%d] esta com nenhum individuo valido\n\t[O PROGRAMA IRA SE INCERRAR]\n",this->idGeneration);
+        exit(-1);
     }
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,roulette());

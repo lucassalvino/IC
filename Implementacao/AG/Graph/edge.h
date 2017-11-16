@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include "vertex.h"
+#include <vector>
 namespace  BaseGraph {
 class Edge
 {
