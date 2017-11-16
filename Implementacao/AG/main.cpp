@@ -38,7 +38,7 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                     }
                 }
                 else{
-                    numVertex = 0;
+                    break;
                 }
             }
         value->setEvaluation(numVertex / graf.getNumVertex());
