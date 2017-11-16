@@ -35,9 +35,12 @@ Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chr
 TEMPLATE
 Chromosome<TIPO> Operators<TIPO>::CrossOverTwoPoint(Chromosome<TIPO> mother, Chromosome<TIPO> father, int firstDivisionPoint, int secondDivisionPoint)
 {
-    if(mother.getNumberOfElements() != father.getNumberOfElements()) throw string("[ERROR] O numero de genes da mae deve ser igual ao numero de genes do pai");
-    if(firstDivisionPoint < 0 || firstDivisionPoint > mother.getNumberOfElements() || secondDivisionPoint < 0 || secondDivisionPoint > mother.getNumberOfElements()) throw string("[ERROR] O Ponto de Divisão não deve ser negativo ou maior que a quantidade de genes dos pais");
-    if(firstDivisionPoint > secondDivisionPoint) throw string("[ERROR] O primeiro ponto de Divisão deve ser menor ou igual ao segundo ponto de Divisao");
+    if(mother.getNumberOfElements() != father.getNumberOfElements())
+        throw string("[ERROR] O numero de genes da mae deve ser igual ao numero de genes do pai");
+    if(firstDivisionPoint < 0 || firstDivisionPoint > mother.getNumberOfElements() || secondDivisionPoint < 0 || secondDivisionPoint > mother.getNumberOfElements())
+        throw string("[ERROR] O Ponto de Divisão não deve ser negativo ou maior que a quantidade de genes dos pais");
+    if(firstDivisionPoint > secondDivisionPoint)
+        throw string("[ERROR] O primeiro ponto de Divisão deve ser menor ou igual ao segundo ponto de Divisao");
     int i=0;
     Chromosome<TIPO> ret;
     ret.setNumberOfElements(mother.getNumberOfElements());
