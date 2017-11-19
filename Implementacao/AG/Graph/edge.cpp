@@ -18,7 +18,7 @@ void BaseGraph::Edge::setDestiny(Vertex *value)
     if (value == 0) throw std::string("O ponteiro para o vertice de destino nao pode ser nulo");
     if (origin == 0) throw std::string("O Ponteiro para a origem ainda nao foi setado, set a origem primeiro");
     destiny = value;
-    origin->addVertexAdjacent(destiny->getId());
+    origin->addVertexAdjacent(destiny);
 }
 
 void BaseGraph::Edge::setDistance(double value)

@@ -9,14 +9,17 @@ class Vertex
 public:
     Vertex();
     Vertex(int id);
+    ~Vertex();
     void setId(int value);
     int getId();
     int numberAdjacents();
-    int getAdjacentAt(int index);
-    void addVertexAdjacent(int idVertice);
+    Vertex* getAdjacentAt(int index);
+    std::vector<int> getIDVertexAdjacent();
+    void addVertexAdjacent(Vertex* idVertice);
+    int getGraoVertex();
 private:
     int ID;
-    std::vector<int> adjacent;
+    std::vector<Vertex*> adjacent;
 protected:
 };
 }

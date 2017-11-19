@@ -11,26 +11,25 @@ class Graph
 {
 public:
     Graph();
-    void addEdge(int origin, int destiny, double distance);
+    void addEdge(int origin, int destiny, double distance, bool bidirectional=false, bool updateDistance = false);
     void clear();
     void loadFromFile(std::string source);
     void saveInFile(std::string source);
     Edge *getEdge(int origin, int destiny);
     Edge *getEdge(Vertex origin, Vertex destiny);
     Edge *getEdge(int index);
-    int getIDVertex(int value);
-    int getIDVertexIndex(int index);
+    Vertex* getVertex(int id, bool add = false);
+    Vertex* getVertexIndex(int index);
     int getNumEdge();
     int getNumVertex();
     double **getMatrix();
 protected:
-    std::vector<int> vertex;
+    std::vector<Vertex*> vertex;
     std::vector<Edge> edges;
-    void addEdge(Edge value);
-    void addEdge(Vertex *origin, Vertex *destiny, double distance);
+    void addEdge(Vertex *origin, Vertex *destiny, double distance, bool updateDistance = false);
 private:
     void addVertex(int id);
-    Vertex* getVertex(int id);
+    void addEdge(Edge value, bool updateDistance = false);
 };
 }
 #endif // GRAPH_H

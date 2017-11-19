@@ -19,6 +19,7 @@ class ManagerGeneticAlgorithm
 public:
     ManagerGeneticAlgorithm(){
         saveLog = true;
+        log = "";
         folder = "log/";
     }
     void setFolderLog(string fol){
@@ -44,7 +45,7 @@ public:
             generation.setBest(popu.getBestChromosome());
             generations.push_back(generation);
             if(saveLog)
-                save_Log(popu);
+                add_Log(popu);
             popu.nextPopulation();
         }
         /*resumo AG*/
@@ -52,39 +53,50 @@ public:
         for(typename list<Generation<TIPO> >::iterator it = generations.begin(); it!= generations.end();i++,it++){
             printf("[LOG] Geracao [%d], melhor resultado [%lf] do cromossomo [%d]. Somatorio geracao: [%lf]\n",i,it->getBest().getEvaluation(),it->getBest().getIdGene(),it->getEvaluationSum());
         }
+        if(saveLog) save_Log();
     }
+
 private:
     list<Generation<TIPO> > generations;
     string folder;
+    string log;
     bool saveLog;
     int numGeneration;
+    void save_Log(){
+        string caminho = folder+QDateTime::currentDateTime().toString().toStdString();
+        replace(caminho.begin(),caminho.end(),':','_');
+        replace(caminho.begin(),caminho.end(),' ','_');
+        caminho+=string(".log");
+        FILE* arq = fopen(caminho.c_str(),"w");
+        if(arq == 0){
+            throw string("Nao he possivel abrir o arquivo de logs: ["+caminho+"].");
+        }
+        fprintf(arq, "%s", log.c_str());
+        fclose(arq);
+    }
 
-    void save_Log(Population<TIPO>& popu){
+    void add_Log(Population<TIPO>& popu, bool saveLog = false){
         char aux[10];*aux = 0;
+        char tmp[50000];*tmp = 0;
         sprintf(aux,"%d",numGeneration);
         string patch = folder+QDateTime::currentDateTime().toString().toStdString();
                 patch+=string("generation_");
                 patch+=string(aux);
-                patch+=string(".log");
-        replace(patch.begin(),patch.end(),':','_');
-        replace(patch.begin(),patch.end(),' ','_');
-        FILE* arq = fopen(patch.c_str(),"w");
-        if(arq == 0){
-            throw string("Nao he possivel abrir o arquivo de logs: ["+patch+"].");
-        }
-        fprintf(arq,"Ambiente:%s\n",popu.getEnvironment().ToString().c_str());
-        fprintf(arq,"ID Populacao[%d]\nNumero de elementos da populacao: [%d]\n",popu.getIdGeneration(),popu.getNumChromosomes());
-        fprintf(arq,"Somatorio fator de avaliação dos cromossomos: [%lf]\n",popu.getEvaluationSum());
-        fprintf(arq,"ID do melhor Cromossomo [%d]\n",popu.getBestChromosome().getIdGene());
+        log += patch + "\n";
+        sprintf(tmp,"Ambiente:%s\n",popu.getEnvironment().ToString().c_str()); log += string(tmp);*tmp = 0;
+        sprintf(tmp,"ID Populacao[%d]\nNumero de elementos da populacao: [%d]\n",popu.getIdGeneration(),popu.getNumChromosomes());log += string(tmp);*tmp = 0;
+        sprintf(tmp,"Somatorio fator de avaliação dos cromossomos: [%lf]\n",popu.getEvaluationSum());log += string(tmp);*tmp = 0;
+        sprintf(tmp,"ID do melhor Cromossomo [%d]\n",popu.getBestChromosome().getIdGene());log += string(tmp);*tmp = 0;
         for(int i = 0;i<popu.getNumChromosomes();i++){
             Chromosome<TIPO> g = popu.getChromosomeAt(i);
-            fprintf(arq,"[%d]   [%lf]   [",g.getIdGene(),g.getEvaluation());
+            sprintf(tmp,"[%d]   [%lf]   [",g.getIdGene(),g.getEvaluation());log += string(tmp);*tmp = 0;
             for(int j = 0; j<g.getNumberOfElements();j++){
-                fprintf(arq," %d ",g.getGeneAt(j));
+                sprintf(tmp," %d ",g.getGeneAt(j));log += string(tmp);*tmp = 0;
             }
-            fprintf(arq,"]\n");
+            sprintf(tmp,"]\n");log += string(tmp);*tmp = 0;
         }
-        fclose(arq);
+        if (saveLog)
+            save_Log();
     }
 };
 

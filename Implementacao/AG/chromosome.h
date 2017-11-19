@@ -97,6 +97,8 @@ public:
     }
 
     void setEvaluation(double value){
+        if(value < 0)
+            value = 0; /* valores negativos nao serao utilizados*/
         evaluation = value;
     }
 

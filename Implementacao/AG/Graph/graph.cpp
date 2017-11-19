@@ -4,48 +4,60 @@ BaseGraph::Graph::Graph()
     clear();
 }
 
-void BaseGraph::Graph::addEdge(Vertex* origin, Vertex* destiny, double distance)
+void BaseGraph::Graph::addEdge(Vertex* origin, Vertex* destiny, double distance, bool updateDistance)
 {
     Edge add;
     add.setOrigin(origin);
     add.setDestiny(destiny);
     add.setDistance(distance);
-    addEdge(add);
+    addEdge(add, updateDistance);
 }
 
 void BaseGraph::Graph::addVertex(int id)
 {
     for(int i = 0; i < (int)vertex.size(); i++){
-        if(vertex[i] == id)return;
+        if(vertex[i]->getId() == id)return;
     }
-    vertex.push_back(id);
+    vertex.push_back(new Vertex(id));
 }
 
-BaseGraph::Vertex *BaseGraph::Graph::getVertex(int id)
+BaseGraph::Vertex *BaseGraph::Graph::getVertex(int id, bool add)
 {
     for(int i = 0; i<(int)vertex.size(); i++){
-        if(id == vertex[i]){/*vertex ja existe*/
-            for(int j = 0; j != (int)edges.size(); j++){
-                if(edges[j].getOrigin()->getId() == id)return edges[j].getOrigin();
-                if(edges[j].getDestiny()->getId() == id)return edges[j].getDestiny();
-            }
+        if(id == vertex[i]->getId()){/*vertex ja existe*/
+            return vertex[i];
         }
     }
-    return new Vertex(id);
+    if(add){
+        Vertex* add = new Vertex(id);
+        vertex.push_back(add);
+        return add;
+    }else{
+        return 0;
+    }
 }
 
-void BaseGraph::Graph::addEdge(int origin, int destiny, double distance)
+void BaseGraph::Graph::addEdge(int origin, int destiny, double distance, bool bidirectional, bool updateDistance)
 {
-   addEdge(getVertex(origin), getVertex(destiny), distance);
+    addEdge(getVertex(origin, true), getVertex(destiny, true), distance,updateDistance);
+    if(bidirectional)
+        addEdge(getVertex(destiny, true), getVertex(origin, true), distance,updateDistance);
 }
 
-void BaseGraph::Graph::addEdge(Edge value){
-    addVertex(value.getOrigin()->getId());
-    addVertex(value.getDestiny()->getId());
-    edges.push_back(value);
+void BaseGraph::Graph::addEdge(Edge value, bool updateDistance){
+    Edge* val = getEdge(value.getOrigin()->getId(), value.getDestiny()->getId());
+    if (!val){//insert
+        addVertex(value.getOrigin()->getId());
+        addVertex(value.getDestiny()->getId());
+        edges.push_back(value);
+    }
+    if (val && updateDistance) val->setDistance(value.getDistance());//update distance
 }
 
 void BaseGraph::Graph::clear(){
+    for(int i = 0; i < (int)vertex.size(); i++){
+        delete [] vertex[i];
+    }
     vertex.clear();
     edges.clear();
 }
@@ -94,7 +106,7 @@ BaseGraph::Edge* BaseGraph::Graph::getEdge(Vertex origin, Vertex destiny)
 
 BaseGraph::Edge *BaseGraph::Graph::getEdge(int index)
 {
-    std::vector<Edge>::iterator it = edges.begin();
+    std::vector<BaseGraph::Edge>::iterator it = edges.begin();
     for(int i = 0;it != edges.end();i++, it++){
         if(i == index)
             return &(*it);
@@ -102,22 +114,13 @@ BaseGraph::Edge *BaseGraph::Graph::getEdge(int index)
     return 0;
 }
 
-int BaseGraph::Graph::getIDVertex(int value)
+BaseGraph::Vertex *BaseGraph::Graph::getVertexIndex(int index)
 {
-    std::vector<int>::iterator it = vertex.begin();
-    for(;it != vertex.end(); it++){
-        if(value == (*it)) return (*it);
-    }
-    return -1;
-}
-
-int BaseGraph::Graph::getIDVertexIndex(int index)
-{
-    std::vector<int>::iterator it = vertex.begin();
+    std::vector<BaseGraph::Vertex*>::iterator it = vertex.begin();
     for(int i = 0;it != vertex.end(); it++, i++){
         if(i == index) return (*it);
     }
-    return -1;
+    return 0;
 }
 
 int BaseGraph::Graph::getNumEdge()

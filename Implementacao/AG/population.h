@@ -40,6 +40,8 @@ public:
     void setEnvironment(Environment value);
     int getNumChromosomes();
     Chromosome<TIPO> getChromosomeAt(int index);
+    int getNumGene();
+    int getSizePopulation();
 private:
     int idGeneration;
     double evaluationSum;
@@ -51,6 +53,8 @@ private:
     Operators<TIPO>* operators;
     Environment environment;
     GenerateRandomChromosome<TIPO>* getChromossome;
+    int sizePopulation;
+    int numGenes;
 };
 
 #endif // POPULATION_H

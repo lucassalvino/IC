@@ -36,9 +36,16 @@ Chromosome<TIPO> Population<TIPO>::roulette()
     updateEvaluationSum();
     double aux = 0;
     double limit = Utility::fRand(0,this->evaluationSum);
-    typename list<Chromosome<TIPO> >::iterator it;
-    for(it = chromosomes.begin(); (aux < limit) && it != chromosomes.end(); it++){
+    typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin();
+    for(; (aux < limit) && it != chromosomes.end(); it++){
         aux += it->getEvaluation();
+    }
+    if(it == chromosomes.end() && aux >= limit){/*chegou ao fim sem achar nenhum cromossomo*//*retorna qualquer cromossomo*/
+        printf("\t\t[ALERTA] Não foi possivel escolher um cromossomo na roleta. Um cromossomo aleatorio foi escolhido.\n");
+        int pos = rand()%(int)chromosomes.size();
+        it = chromosomes.begin();
+        for(int i = 0; i < pos; i++){it++;}
+        return *it;
     }
     it--;
     return *it;
@@ -129,10 +136,22 @@ TEMPLATE
 Chromosome<TIPO> Population<TIPO>::getChromosomeAt(int index)
 {
     typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin();
-    if(chromosomes.size() > index && index >= 0)
+    if((int)chromosomes.size() > index && index >= 0)
         for(;index!=0;index--)
             it++;
     return *it;
+}
+
+template<class TIPO>
+int Population<TIPO>::getNumGene()
+{
+    return numGenes;
+}
+
+template<class TIPO>
+int Population<TIPO>::getSizePopulation()
+{
+    return sizePopulation;
 }
 
 
@@ -142,11 +161,11 @@ void Population<TIPO>::CalculateNextPopulation()
     new_chromosomes.clear();
     updateEvaluationSum();
     if(evaluationSum == 0){
-        printf("\n[PERIGO] A populacao [%d] esta com nenhum individuo valido\n\t[O PROGRAMA IRA SE INCERRAR]\n",this->idGeneration);
-        exit(-1);
+        printf("\n[PERIGO] A populacao [%d] esta com nenhum individuo valido, todos com aptidao = 0\n\tA roleta nao irá selecionar nenhum individuo\n\n",this->idGeneration);
     }
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
-        Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,roulette());
+        Chromosome<TIPO> role = roulette();
+        Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,role);
         son.setIdGene(this->idGeneration++);
         son = operators->Mutation(son,environment.getRateChange());
         new_chromosomes.push_back(son);
