@@ -117,6 +117,6 @@ void executaAG(){
     Environment ambiente;
     ambiente.setRateChange(0.01);
     run.setSaveLog(true);
-    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,new XGenerateRandomChromosome(),1000,20,6);
+    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,new XGenerateRandomChromosome(),200,20,6);
 }
 #endif // ARTIGOIIJCECEC_H
