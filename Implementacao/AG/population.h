@@ -24,7 +24,7 @@ TEMPLATE
 class Population
 {
 public:
-    Population(GenerateGene<TIPO> *ge,CalculateEvaluation<TIPO>*calc, Operators<TIPO>* operato, GenerateRandomChromosome<TIPO>* generateCromossome);
+    Population(GenerateGene<TIPO> *ge, CalculateEvaluation<TIPO>*calc, Operators<TIPO>* operatos, GenerateRandomChromosome<TIPO>* generateCromossome);
     ~Population();
     void evaluationAll();
     void initPopulation(int sizePopulation, int numGenes);
@@ -42,6 +42,7 @@ public:
     Chromosome<TIPO> getChromosomeAt(int index);
     int getNumGene();
     int getSizePopulation();
+    double getDefaultDeviation();
 private:
     int idGeneration;
     double evaluationSum;

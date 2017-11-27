@@ -1,17 +1,18 @@
 #include "population.h"
 
 TEMPLATE
-Population<TIPO>::Population(GenerateGene<TIPO> *ge, CalculateEvaluation<TIPO>*calc, Operators<TIPO> *operato, GenerateRandomChromosome<TIPO> *generateCromossome)
+Population<TIPO>::Population(GenerateGene<TIPO> *ge, CalculateEvaluation<TIPO>*calc, Operators<TIPO> *operatos, GenerateRandomChromosome<TIPO> *generateCromossome)
 {
     if(ge == 0) throw string("GenerateGene esta nulo");
     if(calc == 0) throw string("CalculateEvaluation esta nulo");
-    if(operato == 0) throw string("Operators esta nulo");
+    if(operatos == 0) throw string("Operators esta nulo");
     if(generateCromossome == 0) throw string("GenerateRandomChromosome esta nulo");
     getGene = ge;
     calculateEvaluation = calc;
-    operators = operato;
+    this->operators = operatos;
     idGeneration = -1;
     getChromossome = generateCromossome;
+    defaultDeviation = 0;
 }
 
 TEMPLATE
@@ -108,6 +109,7 @@ TEMPLATE
 void Population<TIPO>::updateEvaluationSum() /*Calcula o valor de todos os cromossomos*/
 {
     this->evaluationSum = 0;
+    this->defaultDeviation = 0;
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         it->setEvaluation(this->calculateEvaluation->getEvaluation(&(*it)));
         this->evaluationSum += it->getEvaluation();
@@ -154,6 +156,11 @@ int Population<TIPO>::getSizePopulation()
     return sizePopulation;
 }
 
+template<class TIPO>
+double Population<TIPO>::getDefaultDeviation()
+{
+    return defaultDeviation;
+}
 
 TEMPLATE
 void Population<TIPO>::CalculateNextPopulation()

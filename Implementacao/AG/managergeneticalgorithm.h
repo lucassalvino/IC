@@ -49,7 +49,7 @@ public:
             popu.nextPopulation();
         }
         /*resumo AG*/
-        i = 0;
+        i=0;
         for(typename list<Generation<TIPO> >::iterator it = generations.begin(); it!= generations.end();i++,it++){
             printf("[LOG] Geracao [%d], melhor resultado [%lf] do cromossomo [%d]. Somatorio geracao: [%lf]\n",i,it->getBest().getEvaluation(),it->getBest().getIdGene(),it->getEvaluationSum());
         }

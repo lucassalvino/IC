@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <random>
+#include <chrono>
 using namespace std;
 
 class Utility{
@@ -30,6 +32,15 @@ public:
         while(x<=y);
         //printf("verifica:x [%lf] y[%lf] k[%d]\n",x,y,k);
         return k;
+    }
+
+    bool getChance(double probability){
+        default_random_engine generator;
+        auto now = chrono::high_resolution_clock::now();
+        auto timeMillis = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()).count();
+        generator.seed (timeMillis);
+        bernoulli_distribution distribution(probability);
+        return (distribution(generator));
     }
 };
 
