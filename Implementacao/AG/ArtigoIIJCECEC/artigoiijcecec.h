@@ -68,17 +68,20 @@ public:
 
 class XCalculateEvaluation : public CalculateEvaluation<int>{
     virtual double calculateEvaluation(Chromosome<int> value,int init, int final) override {
+        value = value;
+        init = init;
+        final = final;
         return 0;
     }
 
     virtual double calculateEvaluation(Chromosome<int> value) override {
+        value = value;
         return 0;
     }
 
     virtual double getEvaluation(Chromosome<int>* value) override{
         double peso = 0;
         bool comeco = false;
-        bool fim = false;
         if(value->getGeneAt(0) == numeroVerticeOrigem){
             comeco = true;
             peso += 10; //bonus para o cromossomo. Pois o mesmo possui inicio no local de destino esperado
@@ -91,8 +94,6 @@ class XCalculateEvaluation : public CalculateEvaluation<int>{
                 break;
             }else{
                 if(comeco && (value->getGeneAt(i+1) == numeroVerticeDestino)){ // o cromossomo em questao atende os requisitos de origem e destino
-                    fim = true;
-                    printf("\n\t\t O Cromossomo [%d] atende os requisitos de origem destino\n", value->getIdGene());
                     peso += 20; // este cromossomo atende o percurso origem destino
                 }
                 peso += ares->getDistance();
@@ -116,7 +117,7 @@ void executaAG(){
     ManagerGeneticAlgorithm<int> run;
     Environment ambiente;
     ambiente.setRateChange(0.01);
-    run.setSaveLog(true);
-    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(), new Operators<int>(),ambiente,new XGenerateRandomChromosome(),200,20,6);
+    run.setSaveLog(false);
+    run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(),ambiente,new XGenerateRandomChromosome(),200,20,6);
 }
 #endif // ARTIGOIIJCECEC_H

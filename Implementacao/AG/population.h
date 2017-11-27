@@ -17,7 +17,7 @@ using namespace std;
 TEMPLATE
 class GenerateRandomChromosome{
 public:
-    virtual Chromosome<TIPO> GenerateChromosome(int numGenes, int ID){}
+    virtual Chromosome<TIPO> GenerateChromosome(int numGenes, int ID){ numGenes = numGenes; ID = ID; throw std::string("Função ainda não definida");}
 };
 
 TEMPLATE
@@ -45,6 +45,7 @@ public:
 private:
     int idGeneration;
     double evaluationSum;
+    double defaultDeviation;
     void updateEvaluationSum();
     list<Chromosome<TIPO> > chromosomes;
     list<Chromosome<TIPO> > new_chromosomes;
