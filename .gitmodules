@@ -1,0 +1,3 @@
+[submodule "Implementacao/SimuladorTrafego/myLibraries"]
+	path = Implementacao/SimuladorTrafego/myLibraries
+	url = https://github.com/lucassalvino/myLibraries

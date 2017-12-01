@@ -7,10 +7,16 @@ TARGET = SimuladorTrafego
 CONFIG += console
 CONFIG -= app_bundle
 
+LIBS += -pthread
+
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    manager.cpp
+    manager.cpp \
+    myLibraries/BasisForDeveloping/config.cpp \
+    myLibraries/BasisForDeveloping/data.cpp \
+    myLibraries/BasisForDeveloping/datatype.cpp \
+    myLibraries/BasisForDeveloping/utility.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -25,11 +31,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
     Xdata.h \
-    manager.h
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/release/ -lBasisForDeveloping
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/debug/ -lBasisForDeveloping
-else:unix: LIBS += -L$$PWD/../../../build-BasisForDeveloping-Desktop_Qt_5_9_1_GCC_64bit-Debug/ -lBasisForDeveloping
-
-INCLUDEPATH += $$PWD/../../../BasisForDeveloping
-DEPENDPATH += $$PWD/../../../BasisForDeveloping
+    manager.h \
+    myLibraries/BasisForDeveloping/config.h \
+    myLibraries/BasisForDeveloping/data.h \
+    myLibraries/BasisForDeveloping/datatype.h \
+    myLibraries/BasisForDeveloping/utility.h

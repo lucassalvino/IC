@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
-
-#include <config.h> /*from https://github.com/lucassalvino/BasisForDeveloping */
 #include "Xdata.h"
+#include "myLibraries/BasisForDeveloping/config.h"
+using namespace BaseDeveloping;
 
 int main(int argc, char *argv[])
 {
