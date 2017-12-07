@@ -172,10 +172,14 @@ void Population<TIPO>::CalculateNextPopulation()
     }
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         Chromosome<TIPO> role = roulette();
-        Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,role);
-        son.setIdGene(this->idGeneration++);
-        son = operators->Mutation(son,environment.getRateChange());
-        new_chromosomes.push_back(son);
+        if(Utility::getChance(environment.getRateCrossOver())){
+            Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,role);
+            son.setIdGene(this->idGeneration++);
+            new_chromosomes.push_back(son);
+        }
+        if(Utility::getChance(environment.getRateCrossOver())){
+            role = operators->Mutation(role);
+        }
     }
 }
 

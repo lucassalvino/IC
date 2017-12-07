@@ -16,11 +16,11 @@ public:
         return fMin + f * (fMax - fMin);
     }
 
-    int getNumberGeneForChormosome(float init,float final, float precision){ /* retorna quantos bits serao necessarios para representar */
+    static int getNumberGeneForChormosome(float init,float final, float precision){ /* retorna quantos bits serao necessarios para representar */
         float aux = ((init - final)/precision)+1;
         return (int) log2(aux);
     }
-    int randomNumPossion(double lambida){/*funcao feita baseado no encontro da IC*/
+    static int randomNumPossion(double lambida){/*funcao feita baseado no encontro da IC*/
         /**retorna um numreo entre [0,2] com frequencia determinada por lambida e os parametros de fRand*/
         double y = exp(lambida);
         double x = 1;
@@ -34,7 +34,7 @@ public:
         return k;
     }
 
-    bool getChance(double probability){
+    static bool getChance(double probability){
         default_random_engine generator;
         auto now = chrono::high_resolution_clock::now();
         auto timeMillis = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()).count();
