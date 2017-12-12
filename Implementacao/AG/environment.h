@@ -9,14 +9,14 @@ public:
         rateDecreaseCrossOver = 0;
         rateChange = -1;
         rateCrossOver = -1;
-        generationNumberNotFixedRateCrossOver = -1;
+        generationNumberNotFixedRateCrossOver = 0;
     }
 
     int getGenerationNumberNotFixedRateCrossOver(){
         return generationNumberNotFixedRateCrossOver;
     }
 
-    int setGenerationNumberNotFixedRateCrossOver(int value){
+    void setGenerationNumberNotFixedRateCrossOver(int value){
         if (value < 0)
             throw string("O valor de generationNumberNotFixedRateCrossOver não pode ser negativo");
         generationNumberNotFixedRateCrossOver = value;
@@ -31,6 +31,8 @@ public:
     }
 
     double getRateChange(){
+        if(rateChange < 0)
+            throw string("A taxa de Mutação (rateChange) ainda não foi setada");
         return rateChange;
     }
 
@@ -41,6 +43,8 @@ public:
     }
 
     double getRateCrossOver(){
+        if(rateCrossOver<0)
+            throw string("A taxa de CrossOver (rateCrossOver) ainda nao foi setada");
         return rateCrossOver;
     }
 
@@ -50,9 +54,14 @@ public:
         rateChange = 1 - rateCrossOver; //rateChange recebe a diferenca do valor setado de 100%(1)
     }
 
+    void updateValues(){
+        setRateCrossOver(getRateCrossOver()-GetRateDecreaseCrossOver());
+        printf("\t[INFO] Realizado update para os valores do ambiente. Novos Valores: \n\t\t%s\n", this->ToString().c_str());
+    }
+
     string ToString(){
-        char aux [90]; *aux = 0;
-        sprintf(aux,"rateChange = %lf, rateCrossOver = %lf",rateChange,rateCrossOver);
+        char aux [255]; *aux = 0;
+        sprintf(aux,"rateChange = %.3lf, rateCrossOver = %.3lf, rateDecreaseCrossOver = %.3lf, generationNumberNotFixedRateCrossOver = %d",rateChange,rateCrossOver,rateDecreaseCrossOver,generationNumberNotFixedRateCrossOver);
         return string(aux);
     }
 

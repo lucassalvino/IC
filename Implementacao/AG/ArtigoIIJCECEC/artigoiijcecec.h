@@ -116,7 +116,9 @@ void executaAG(){
     carregaGrafo();
     ManagerGeneticAlgorithm<int> run;
     Environment ambiente;
-    ambiente.setRateChange(0.01);
+    ambiente.setRateChange(0.0001);
+    ambiente.setRateDecreaseCrossOver(0.0001);
+    ambiente.setGenerationNumberNotFixedRateCrossOver(150);
     run.setSaveLog(false);
     run.runGeneticAlgorithm(new XGenerateGene(),new XCalculateEvaluation(),ambiente,new XGenerateRandomChromosome(),200,20,6);
 }

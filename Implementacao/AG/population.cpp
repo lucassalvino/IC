@@ -172,13 +172,23 @@ void Population<TIPO>::CalculateNextPopulation()
     }
     for(typename list<Chromosome<TIPO> >::iterator it = chromosomes.begin(); it != chromosomes.end(); it++){
         Chromosome<TIPO> role = roulette();
+        bool add = false;
         if(Utility::getChance(environment.getRateCrossOver())){
             Chromosome<TIPO> son = operators->CrossOverTwoPoint(*it,role);
             son.setIdGene(this->idGeneration++);
             new_chromosomes.push_back(son);
+            add = true;
         }
         if(Utility::getChance(environment.getRateCrossOver())){
             role = operators->Mutation(role);
+            new_chromosomes.push_back(role);
+            add = true;
+        }
+        if(environment.getGenerationNumberNotFixedRateCrossOver() > this->idGeneration){
+            environment.updateValues();
+        }
+        if(!add){
+            new_chromosomes.push_back(role);
         }
     }
 }
