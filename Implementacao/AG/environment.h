@@ -5,6 +5,31 @@ using namespace std;
 #include <stdio.h>
 class Environment{
 public:
+    Environment(){
+        rateDecreaseCrossOver = 0;
+        rateChange = -1;
+        rateCrossOver = -1;
+        generationNumberNotFixedRateCrossOver = -1;
+    }
+
+    int getGenerationNumberNotFixedRateCrossOver(){
+        return generationNumberNotFixedRateCrossOver;
+    }
+
+    int setGenerationNumberNotFixedRateCrossOver(int value){
+        if (value < 0)
+            throw string("O valor de generationNumberNotFixedRateCrossOver não pode ser negativo");
+        generationNumberNotFixedRateCrossOver = value;
+    }
+
+    double GetRateDecreaseCrossOver(){
+        return rateDecreaseCrossOver;
+    }
+
+    void setRateDecreaseCrossOver(double value){
+        rateDecreaseCrossOver = value;
+    }
+
     double getRateChange(){
         return rateChange;
     }
@@ -37,6 +62,8 @@ private:
     total dos operadores geneticos. Isso é feito automaticamente ao setar um dos valores correspondentes, o outro é preenchido com a diferença do mesmo*/
     double rateChange;
     double rateCrossOver;
+    double rateDecreaseCrossOver;/*o valor que será decrementado da taxa de cruzamento e acrescentado na taxa mutação a partir de generationNumberNotFixedRateCrossOver*/
+    int generationNumberNotFixedRateCrossOver;
     //////////////////////////////////////////////////////////////////////////////
 };
 
